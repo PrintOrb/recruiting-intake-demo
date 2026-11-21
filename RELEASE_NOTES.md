@@ -1,27 +1,57 @@
-## Recruiting Intake System — Standalone Download
+# Recruiting Intake System v1.1.0
 
-This release is the downloadable **non-demo** student registration and recruiting lead-management application.
+**Standalone recruiting intake and lead-management system** — the downloadable,
+non-demo edition. This version supersedes v1.0.0 and contains no actual student
+records or demonstration leads.
 
-### In the download
-- Student intake form with name, phone, email, date of birth, and graduation year
-- Recruiter lead dashboard with editing, deletion, and contact-status tracking
-- Offline QR generator, SMS export (`FirstName|PhoneNumber`), and batch confirmation
-- **Blank, header-only** `Recruiting_Leads.csv` — no demonstration records
-- Excel-compatible reporting workbook (also blank)
-- Documentation and editable HTML, CSS, and JavaScript files
+## What's new since v1.0.0
 
-### Setup
-Download the **`Recruiting_Intake_System_v1.0.0.zip` asset**, extract its entire contents, and open `Recruiting_Intake_Kiosk.html` in compatible desktop Edge or Chrome. Select the included blank `Recruiting_Leads.csv` file. Open the staff manager and select the same file when managing records.
+- **Student kiosk:** automatically rotates three different real, credited
+  public-domain U.S. military photos every 20 seconds, with a 1.8-second fade.
+  Cleaned up the student page headline.
+- **Recruiter dashboard:** automatically calculates each lead's current age,
+  shows their birthday, and lists upcoming birthdays over the next 30 days.
+  The unused average-age statistic was removed.
+- **Email follow-up:** export unique, consented email addresses to a BCC list
+  or download a mail-merge CSV. Email status is tracked separately from SMS.
+- **Texting workflow:** retain name-and-number QR batches, SMS exports,
+  and manual confirmation of recipients actually contacted.
+- **iPhone Shortcut:** an install link and scannable installation QR code
+  now point to the shared companion Recruiting Text Assistant on Apple iCloud.
+  No recruiting lead data is embedded in the installation QR.
 
-This application is not an officially approved government information system. Before collecting real student information, obtain authorization for the device, storage, privacy notice, consent language, and any SMS/QR transfer. GitHub Pages and this repository do not store live leads.
+## Included in the download
 
+- `Recruiting_Intake_Kiosk.html` — student intake form
+- `Recruiting_Staff_Manager.html` — staff dashboard
+- `iphone-shortcut.html` — iPhone Shortcut installation page
+- `Recruiting_Leads.csv` — **blank, header-only** lead file
+- `Recruiting_Excel_Tracker.xlsx` — blank Excel reporting workbook
+- HTML, CSS, JavaScript, three official military photographs, photo credits,
+  and staff documentation
 
-- Added email follow-up: BCC address copy, personalized mail-merge CSV export,
-  and independent Emailed/New tracking.
-- Duplicate email addresses are excluded from the automated export for review.
-- Existing eleven-column CSV databases remain readable and are extended with
-  a new `Email Status` column when the next save is made.
-- Email exports exclude phone numbers and date of birth. No email is sent by
-  the application; use an authorized recruiting email account.
+**Public GitHub Pages demo files and sample lead records are not included.**
 
-- The next build includes an automatic 20-second kiosk background slideshow, with a 1.8-second crossfade and editable photo treatments.
+## Installation
+
+1. Download **`Recruiting_Intake_System_v1.1.0.zip`** from the Assets section.
+2. Extract the ZIP completely to an approved folder.
+3. Open `Recruiting_Intake_Kiosk.html` in a compatible desktop Chrome/Edge
+   browser and select the included `Recruiting_Leads.csv`.
+4. Open `Recruiting_Staff_Manager.html` and select that **same** CSV.
+5. For SMS follow-up, install and inspect the shared iPhone Shortcut through
+   the dashboard's **Get iPhone Shortcut** link, and confirm actual texts
+   after sending. For email, use an authorized email account.
+
+The file format has twelve columns, including `Email Status`. The manager
+can read older eleven-column records and add the status column on save.
+
+## Important safety and operational limits
+
+This is **not an approved U.S. Air Force information system**. Before collecting
+any real student information—especially minors' information—obtain relevant
+organizational, IT, privacy, device, storage, and consent approvals. The local
+application does not provide logins or encryption. The publicly hosted demo
+is for **fictional data only**. Never put real recruiting leads, DOBs, or
+contact information on GitHub. Shortcut sharing is separate from device or
+workflow approval.

@@ -40,10 +40,15 @@ reporting workbook. There are **no preloaded leads or demonstration records**.
 4. Email outreach: copy unique BCC addresses or download a mail-merge CSV with
    name/email/graduation year. After sending using an approved email account,
    mark selected leads Emailed and save. Email status is separate from SMS.
-5. The staff manager creates QR batches in `FirstName|PhoneNumber` format for
-   the existing iPhone Shortcut. After messages actually send, confirm the
-   successful recipients on the dashboard to mark them Contacted.
-6. Edit ordinary wording and colors in `assets/js/Recruiting_Config.js`.
+5. The staff manager creates QR batches in `FirstName|PhoneNumber` format.
+   Use its **Get iPhone Shortcut** link to install the shared companion
+   shortcut. Its installation page and QR code require internet access to open
+   the Apple iCloud sharing page. Before real use, review the shortcut actions.
+6. After messages actually send, confirm the successful recipients on the
+   dashboard to mark them Contacted. Scanning alone never marks them sent.
+7. The lead dashboard displays each student's age and next birthday, plus
+   a 30-day upcoming birthday overview. It does not automatically send wishes.
+8. Edit ordinary wording and colors in `assets/js/Recruiting_Config.js`.
    Technical and customization instructions are in `docs/`.
 
 The CSV in this archive contains headers only. The optional `.xlsx` is a
