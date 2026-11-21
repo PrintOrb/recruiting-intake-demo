@@ -112,3 +112,18 @@ A field like "school name" is **not** merely a visual edit. You must coordinate 
 ### Timed student background slideshow
 
 The student kiosk cycles through three visual treatments of `assets/images/Kiosk_Background.jpg` every 20 seconds with a 1.8-second crossfade. Change `kiosk.backgroundShuffle.intervalSeconds`, `fadeSeconds`, `images`, or `presets` in `assets/js/Recruiting_Config.js`. You can replace the repeated paths with different locally stored approved images. The animation is decorative and never affects the intake form.
+
+## iPhone Shortcut installation link
+
+The recruiter dashboard includes **Get iPhone Shortcut**, which opens `iphone-shortcut.html`. 
+This page supports a single-tap installation link on an iPhone and an offline-generated QR code to scan from a computer.
+
+**To activate it:**
+1. On the iPhone holding the finished **Recruiting Text Assistant**, long-press the shortcut, tap **Share**, then **Copy iCloud Link**. If necessary, open the shortcut editor and use its Share menu.
+2. Review the shortcut before sharing: remove any personal phone numbers, account details, contact records, or test-only text.
+3. In each version's `assets/js/Recruiting_Config.js`, replace `shortcuts.iphoneShareUrl: ""` with that exact Apple `https://www.icloud.com/shortcuts/...` link. Keep the two configurations in sync.
+4. Publish the changes to GitHub Pages and test installation on a different iPhone.
+
+Until a valid share link is configured, the installer page explains why installation is unavailable; it never shows a fake or broken download link.
+
+**Important:** An iCloud sharing link allows anyone with the link to inspect, copy, and modify a copy of the shortcut. Do not publish sensitive details. Sharing does not establish Air Force approval to use an unapproved app or personal device for real leads.

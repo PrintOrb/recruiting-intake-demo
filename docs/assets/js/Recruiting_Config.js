@@ -52,6 +52,13 @@
       heading: "Recruiting Lead Command"
     },
 
+    shortcuts: {
+      // On your iPhone: Shortcuts > long-press Recruiting Text Assistant
+      // > Share > Copy iCloud Link. Paste the link here on BOTH builds.
+      // Leave blank until the owner shares a reviewed, publishable shortcut.
+      iphoneShareUrl: ""
+    },
+
     data: {
       // Do not change the CSV column names/order without updating both programs.
       expectedFileName: "Recruiting_Leads.csv",
