@@ -56,7 +56,7 @@
       // On your iPhone: Shortcuts > long-press Recruiting Text Assistant
       // > Share > Copy iCloud Link. Paste the link here on BOTH builds.
       // Leave blank until the owner shares a reviewed, publishable shortcut.
-      iphoneShareUrl: ""
+      iphoneShareUrl: "https://www.icloud.com/shortcuts/2cfb4f9e972f4765a541827742fdd476"
     },
 
     data: {
