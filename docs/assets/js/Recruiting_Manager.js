@@ -205,11 +205,6 @@ function renderDashboard() {
   const emailEligible = eligibleForEmail();
   const today = new Date();
   renderUpcomingBirthdays(today);
-  const validAges = leadRecords.map(record => birthdayInformation(record[6], today))
-    .filter(Boolean).map(info => info.age);
-  managerEl("averageAge").textContent = validAges.length
-    ? (validAges.reduce((sum, age) => sum + age, 0) / validAges.length).toFixed(1)
-    : "—";
 
   managerEl("total").textContent = leadRecords.length;
   managerEl("eligible").textContent = eligible.length;
