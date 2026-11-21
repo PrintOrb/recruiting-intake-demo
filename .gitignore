@@ -1,0 +1,13 @@
+# Never commit real recruiting records, exports, backups or secrets.
+**/Recruiting_Leads.csv
+**/*_Leads_REAL.csv
+**/lead-export*.csv
+**/SMS_Export*
+**/*.bak
+**/*.tmp
+*.env
+.env*
+*.db
+*.sqlite
+.DS_Store
+Thumbs.db

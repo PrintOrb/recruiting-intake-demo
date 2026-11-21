@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>PUBLIC DEMO | Student Interest</title>
+<link href="assets/css/Recruiting_Kiosk.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="public-demo-banner" role="note">
+'
+             '  PUBLIC DEMO &nbsp;·&nbsp; FICTIONAL TEST RECORDS ONLY &nbsp;·&nbsp; NOT AN OFFICIAL AIR FORCE DATA COLLECTION SYSTEM
+'
+             '</div>
+<!-- Page text: assets/js/Recruiting_Config.js | Page layout: this HTML -->
+<!-- HEADER: visible wording is configured in assets/js/Recruiting_Config.js -->
+<header>
+<div class="brand">
+<div class="logo">AF</div>
+<div>
+<b data-config="brand.name">
+</b>
+<span data-config="brand.studentSubtitle">
+</span>
+</div>
+</div>
+<div class="pill" data-config="brand.studentBadge">
+</div>
+</header>
+<nav class="demo-nav"><span>Student kiosk</span><a href="Recruiting_Staff_Manager.html">Open staff demo →</a></nav>
+<main>
+<!-- HERO: edit main copy in Recruiting_Config.js and structure here -->
+<section class="hero"><div class="hero-issue">THE NEXT STEP IS YOURS  /  01</div>
+<div class="kicker" data-config="kiosk.heroEyebrow">
+</div>
+<h1>
+<span data-config="kiosk.heroMain">
+</span>
+<br/>
+<em data-config="kiosk.heroAccent">
+</em>
+</h1>
+<p data-config="kiosk.heroDescription">
+</p>
+<div class="features">
+<div class="chip">CAREER PATHS</div>
+<div class="chip">EDUCATION BENEFITS</div>
+<div class="chip">GLOBAL OPPORTUNITIES</div>
+</div>
+</section>
+<section class="card" id="setup"><div class="card-meta">STAFF INITIALIZATION  //  FILE CONNECTION</div>
+<div class="topline">
+<span class="dot">
+</span>
+     STAFF SETUP
+    </div>
+<h2>
+     Connect the lead file
+    </h2>
+<p class="sub">
+     To begin the public demo, click <strong>Select demo records</strong>. The page uses fictional data stored in this browser; no file download is required. The original local system instead asks staff to select
+     <b>
+      Recruiting_Leads.csv
+     </b>
+     once on this computer. For this demonstration, the fictional registrations remain in the browser only.
+    </p>
+<button class="primary-action" id="connect">
+     Select demo records
+    </button>
+<div class="msg err hidden" id="setupError" role="alert">
+</div>
+
+</section>
+<section class="card hidden" id="formCard"><div class="card-meta">RECRUITING INTEREST  //  YOUR NEXT STEP</div>
+<div class="topline">
+<span class="dot">
+</span>
+     LET'S GET STARTED
+    </div>
+<h2 data-config="kiosk.formTitle">
+</h2>
+<p class="sub" data-config="kiosk.formDescription">
+</p>
+<!-- FORM FIELDS: customize labels/inputs here; keep IDs unchanged unless updating JS -->
+<form autocomplete="off" id="interestForm">
+<div class="fieldgrid">
+<div class="field">
+<label for="first">
+        First name *
+       </label>
+<input autocomplete="off" id="first" maxlength="60" name="first" placeholder="First name" required=""/>
+</div>
+<div class="field">
+<label for="last">
+        Last name *
+       </label>
+<input autocomplete="off" id="last" maxlength="60" name="last" placeholder="Last name" required=""/>
+</div>
+</div>
+<div class="field">
+<label for="phone">
+       Phone number *
+      </label>
+<input autocomplete="off" id="phone" inputmode="tel" maxlength="20" name="phone" placeholder="(812) 555-0123" required="" type="tel"/>
+</div>
+<div class="field">
+<label for="email">
+       Email address *
+      </label>
+<input autocomplete="off" id="email" maxlength="160" name="email" placeholder="you@example.com" required="" type="email"/>
+</div>
+<div class="fieldgrid">
+<div class="field">
+<label for="dob">
+        Date of birth *
+       </label>
+<input autocomplete="off" id="dob" name="dob" required="" type="date"/>
+</div>
+<div class="field">
+<label for="grad">
+        Graduation year *
+       </label>
+<input autocomplete="off" id="grad" max="2050" min="2000" name="grad" placeholder="2027" required="" step="1" type="number"/>
+</div>
+</div>
+<div class="checkrow">
+<input id="consent" required="" type="checkbox"/>
+<label data-config="kiosk.consentText" for="consent">
+</label>
+</div>
+<div class="msg err hidden" id="error" role="alert">
+</div>
+<button class="primary-action" id="submitBtn" type="submit">
+      Submit my information →
+     </button>
+</form>
+
+</section>
+<section class="card hidden" id="success">
+<div class="success">
+<div class="checkmark">
+      ✓
+     </div>
+<div class="topline" style="justify-content:center">
+<span class="dot">
+</span>
+      SUBMISSION COMPLETE
+     </div>
+<h2 data-config="kiosk.successTitle">
+</h2>
+<p class="sub" data-config="kiosk.successDescription">
+</p>
+<button class="primary-action" id="next">
+      Next student →
+     </button>
+</div>
+</section>
+</main>
+
+<script src="assets/js/Recruiting_Config.js">
+</script>
+<script src="assets/js/Recruiting_Pages_Demo.js"></script>
+<script src="assets/js/Recruiting_Kiosk.js">
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+RECRUITING INTAKE SYSTEM — START HERE
+====================================
+
+1. EXTRACT all files and folders from this ZIP. Do not launch HTML directly
+   from inside the ZIP. The two pages need their assets/ folders.
+
+2. Open Recruiting_Intake_Kiosk.html in desktop Microsoft Edge or Chrome.
+   Click Select lead file, then choose the included Recruiting_Leads.csv.
+   Use fictional data for the first test.
+
+3. After intake is finished, CLOSE the kiosk. Open
+   Recruiting_Staff_Manager.html, select the SAME CSV, then review/copy/QR
+   the FirstName|PhoneNumber list for your existing iPhone Shortcut.
+
+4. TO EDIT WORDING, COLORS, OR QR BATCH SIZE, open:
+       assets/js/Recruiting_Config.js
+   in VS Code or Notepad++. Save, then refresh the pages.
+
+5. FOR FULL DOCUMENTATION, READ:
+       README.md
+       docs/CUSTOMIZATION_GUIDE.md
+       docs/TECHNICAL_REFERENCE.md
+       docs/TESTING_CHECKLIST.md
+
+WARNING: The local CSV is unencrypted and these pages have no login. This is
+not an officially approved Air Force information system. Use real student
+information only after the recruiting organization authorizes the devices,
+privacy notice, consent process and data transfer. Do not send lead data
+through personal email.
+
+
+Background image note:
+- The student page background image is stored at assets/images/Kiosk_Background.jpg
+- Replace that file if you want a different image later.
+
+V5 LOOK AND FEEL: Both screens use a coordinated Air Force-inspired visual theme.
+Brand words/colors: assets/js/Recruiting_Config.js
+Design styling: assets/css/Recruiting_Kiosk.css and Recruiting_Manager.css
+
+
+VERSION 6 CONTACT TRACKING:
+- After your iPhone sends a QR batch, return to the PC.
+- In the QR dialog, uncheck any messages that did not send.
+- Click Confirm sent / mark contacted to save their statuses immediately.
+- To remove a lead, select its checkbox in the staff table and click Delete selected.
+- Scanning alone does NOT synchronize the two devices; staff must confirm successful sends.

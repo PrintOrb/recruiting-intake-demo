@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>PUBLIC DEMO | Recruiting Lead Command</title>
+<link href="assets/css/Recruiting_Manager.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="public-demo-banner" role="note">
+'
+             '  PUBLIC DEMO &nbsp;·&nbsp; FICTIONAL TEST RECORDS ONLY &nbsp;·&nbsp; NOT AN OFFICIAL AIR FORCE DATA COLLECTION SYSTEM
+'
+             '</div>
+<!-- Page text: assets/js/Recruiting_Config.js | Page layout: this HTML -->
+<header>
+<div class="wrap head">
+<div class="head-brand"><div class="manager-mark">AF</div><div class="head-copy">
+<div class="kicker"><span class="header-org" data-config="brand.name"></span><span class="header-kicker-sep"> / </span>
+<span data-config="brand.staffSubtitle"></span></div>
+<h1 data-config="staff.heading">
+</h1>
+</div></div>
+<div class="pill" data-config="brand.staffBadge">
+</div>
+</div>
+</header>
+<nav class="demo-nav"><a href="Recruiting_Intake_Kiosk.html">← Student kiosk</a><span>Staff demo</span><button class="demo-reset" type="button" onclick="resetRecruitingDemo()">Reset demo records</button></nav>
+<main class="wrap">
+
+<div class="toolbar">
+<div class="bar">
+<button id="open">
+      Open demo records
+     </button>
+<button class="secondary" disabled="" id="save">
+      Save changes to CSV
+     </button>
+</div>
+<span class="filename" id="fileName">
+     No file selected
+    </span>
+</div>
+<div class="hidden" id="app">
+<div class="stats">
+<div class="stat">
+<span>
+       Total submissions
+      </span>
+<strong id="total">
+       0
+      </strong>
+</div>
+<div class="stat">
+<span>
+       Ready to text
+      </span>
+<strong id="eligible">
+       0
+      </strong>
+</div>
+<div class="stat">
+<span>
+       Already contacted
+      </span>
+<strong id="contacted">
+       0
+      </strong>
+</div>
+<div class="stat">
+<span>
+       Shared numbers · review
+      </span>
+<strong id="duplicates">
+       0
+      </strong>
+</div>
+</div>
+<!-- SMS EXPORT: generates FirstName|PhoneNumber lines, and offline QR batches -->
+<section class="panel"><div class="panel-overline">OUTREACH / COMMUNICATIONS</div>
+<div class="row">
+<div>
+<h2>
+        Copy-ready SMS list
+       </h2>
+<div class="muted">
+        One line per eligible new lead. Format:
+        <b>
+         FirstName|PhoneNumber
+        </b>
+        . Numbers shared by multiple leads are omitted for manual review.
+       </div>
+</div>
+<div class="actions">
+<button id="copy">
+        Copy SMS list
+       </button>
+<button class="secondary" id="showQR">
+        Show QR for iPhone
+       </button>
+</div>
+</div>
+<textarea id="smsText" placeholder="No eligible leads" readonly="" spellcheck="false"></textarea>
+<div class="muted">After sending messages, confirm the completed recipients in the QR batch window to update their contact status.</div>
+</section>
+<section class="panel"><div class="panel-overline">CONTACTS / RECORDS</div>
+<div class="row">
+<div>
+<h2>
+        Student lead records
+       </h2>
+<div class="muted">
+        Select records to mark contacted, return to New, or permanently remove. Deletion requires confirmation and saves to the CSV immediately.
+       </div>
+</div>
+<input id="search" placeholder="Search name or phone" type="search"/>
+</div>
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>
+<input aria-label="Select visible rows" id="selectAll" type="checkbox"/>
+</th>
+<th>
+          First / Last
+         </th>
+<th>
+          Phone
+         </th>
+<th>
+          Grad year
+         </th>
+<th>
+          Consent
+         </th>
+<th>
+          Status
+         </th>
+<th>
+          Flag
+         </th>
+<th>
+          Submitted
+         </th>
+</tr>
+</thead>
+<tbody id="rows">
+</tbody>
+</table>
+</div>
+<div class="row" style="margin-top:17px">
+<div class="muted" id="countSelected">
+       0 selected
+      </div>
+<div class="actions">
+<button class="secondary" id="markDone">
+        Mark contacted
+       </button>
+<button class="secondary" id="markNew">
+        Mark new
+       </button>
+<button class="danger" id="deleteSelected">
+        Delete selected
+       </button>
+</div>
+</div>
+</section>
+</div>
+<div class="hidden" id="message" role="status">
+</div>
+</main>
+<div aria-labelledby="qrTitle" aria-modal="true" class="qr-backdrop hidden" id="qrBackdrop" role="dialog">
+<div class="qr-dialog">
+<div class="row">
+<div>
+<div class="kicker" style="color:#2f71b3">
+       OFFLINE TRANSFER
+      </div>
+<h2 id="qrTitle">
+       Scan on the recruiter’s iPhone
+      </h2>
+</div>
+<button aria-label="Close QR dialog" class="secondary" id="closeQR">
+      Close ×
+     </button>
+</div>
+<p class="muted">Scan this batch with the iPhone Shortcut.</p>
+<div class="qr-display">
+<canvas aria-label="QR code with name and phone list" height="500" id="qrCanvas" width="500">
+</canvas>
+</div>
+<div aria-live="polite" class="qr-batch" id="qrBatch">
+</div>
+<div class="row">
+<button class="secondary" id="qrPrev">
+      ← Previous batch
+     </button>
+<button id="qrNext">
+      Next batch →
+     </button>
+</div>
+<section aria-label="Confirm which texts were sent" class="qr-confirm-panel">
+<div class="row qr-confirm-head">
+<div>
+<h3>Confirm sent recipients</h3>
+<p class="muted">Scanning the QR does not update this computer. After the Shortcut finishes, uncheck any messages that failed or were skipped. Then confirm to save the selected contacts.</p>
+</div>
+<span class="qr-counter" id="qrChecklistCount"></span>
+</div>
+<div class="qr-checklist" id="qrChecklist"></div>
+<button class="confirm-send" id="qrMarkSent" type="button">Confirm sent · mark contacted</button>
+<p class="qr-error" id="qrStatus" role="alert"></p>
+</section>
+<p class="muted">
+     iPhone Shortcut: insert
+     <b>
+      Scan QR or Barcode
+     </b>
+     →
+     <b>
+      Copy to Clipboard
+     </b>
+     just before the existing
+     <b>
+      Get Clipboard
+     </b>
+     action. Run it to scan this code. Each batch must be scanned and reviewed separately.
+    </p>
+</div>
+</div>
+<script src="assets/js/Offline_QR.js">
+</script>
+<script src="assets/js/Recruiting_Config.js">
+</script>
+<script src="assets/js/Recruiting_Pages_Demo.js"></script>
+<script src="assets/js/Recruiting_Manager.js">
+</script>
+</body>
+</html>
