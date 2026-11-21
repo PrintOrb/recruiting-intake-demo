@@ -16,7 +16,7 @@ const managerConfig = window.RECRUITING_CONFIG;
 const MANAGER_HEADERS = [
   "Submission ID", "Submitted At", "First Name", "Last Name", "Phone",
   "Email", "Date of Birth", "Graduation Year", "Text Consent",
-  "Contact Status", "Source"
+  "Contact Status", "Source", "Email Status"
 ];
 
 let leadHandle = null;
@@ -107,15 +107,36 @@ function eligibleForText() {
   );
 }
 
+// Email outreach is tracked separately from SMS. Exclude invalid or shared
+// addresses and records without explicit recorded contact consent.
+const normalizeEmail = (record) => (record[5] || "").trim().toLowerCase();
+function eligibleForEmail() {
+  const counts = new Map();
+  for (const record of leadRecords) {
+    const email = normalizeEmail(record);
+    if (email) counts.set(email, (counts.get(email) || 0) + 1);
+  }
+  return leadRecords.filter((record) => {
+    const email = normalizeEmail(record);
+    return record[8] === "Yes" && (record[11] || "New") === "New" &&
+      record[2] && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && counts.get(email) === 1;
+  });
+}
+
 // Render with textContent, never row.innerHTML (records are untrusted input).
 function renderDashboard() {
   const counts = countPhoneNumbers();
   const eligible = eligibleForText();
+  const emailEligible = eligibleForEmail();
 
   managerEl("total").textContent = leadRecords.length;
   managerEl("eligible").textContent = eligible.length;
   managerEl("contacted").textContent = leadRecords.filter((r) => r[9] === "Contacted").length;
   managerEl("duplicates").textContent = leadRecords.filter((r) => counts.get(normalizePhone(r)) > 1).length;
+  managerEl("emailEligible").textContent = emailEligible.length;
+  managerEl("emailed").textContent = leadRecords.filter((r) => r[11] === "Emailed").length;
+  managerEl("emailAddresses").value = emailEligible.map(normalizeEmail).join("; ");
+  managerEl("emailCount").textContent = emailEligible.length + " unique addresses ready for follow-up";
 
   // IMPORTANT: iPhone Shortcut consumes FirstName|PhoneNumber, one per line.
   managerEl("smsText").value = eligible.map((record) =>
@@ -128,7 +149,7 @@ function renderDashboard() {
   let shown = 0;
 
   leadRecords.forEach((record, index) => {
-    const searchable = `${record[2]} ${record[3]} ${normalizePhone(record)}`.toLowerCase();
+    const searchable = `${record[2]} ${record[3]} ${normalizePhone(record)} ${normalizeEmail(record)}`.toLowerCase();
     if (search && !searchable.includes(search)) return;
     shown++;
 
@@ -155,6 +176,7 @@ function renderDashboard() {
 
     appendCell(`${record[2]} ${record[3]}`.trim());
     appendCell(record[4]);
+    appendCell(record[5]);
     appendCell(record[7]);
 
     const consentCell = document.createElement("td");
@@ -171,6 +193,13 @@ function renderDashboard() {
     statusCell.append(statusTag);
     tableRow.append(statusCell);
 
+    const emailStatusCell = document.createElement("td");
+    const emailStatusTag = document.createElement("span");
+    emailStatusTag.className = "tag " + (record[11] === "Emailed" ? "done" : "");
+    emailStatusTag.textContent = record[11] || "New";
+    emailStatusCell.append(emailStatusTag);
+    tableRow.append(emailStatusCell);
+
     appendCell(counts.get(normalizePhone(record)) > 1 ? "Shared phone" : "—");
     appendCell((record[1] || "").slice(0, 10));
     tableBody.append(tableRow);
@@ -179,7 +208,7 @@ function renderDashboard() {
   if (!shown) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
-    cell.colSpan = 8;
+    cell.colSpan = 10;
     cell.textContent = "No records match.";
     row.append(cell);
     tableBody.append(row);
@@ -202,13 +231,17 @@ managerEl("open").addEventListener("click", async () => {
     const file = await fileHandle.getFile();
     const fileText = await file.text();
     const parsed = parseManagerCSV(fileText);
-    if (!parsed.length || MANAGER_HEADERS.some((column, index) => parsed[0][index] !== column)) {
+    const header = parsed[0] || [];
+    const modern = header.length === MANAGER_HEADERS.length && MANAGER_HEADERS.every((column, index) => header[index] === column);
+    const legacy = header.length === MANAGER_HEADERS.length - 1 &&
+      MANAGER_HEADERS.slice(0, -1).every((column, index) => header[index] === column);
+    if (!modern && !legacy) {
       throw new Error("The CSV headers do not match " + managerConfig.data.expectedFileName + ".");
     }
     leadHandle = fileHandle;
     sourceCSV = fileText;
     leadRecords = parsed.slice(1).filter((row) => row.some(Boolean))
-      .map((row) => [...row, ...Array(11).fill("")].slice(0, 11));
+      .map((row) => [...row.slice(0, 11), legacy ? "New" : (row[11] || "New")]);
     selectedLeads.clear();
     unsavedChanges = false;
     managerEl("fileName").textContent = file.name;
@@ -225,7 +258,7 @@ managerEl("search").addEventListener("input", renderDashboard);
 managerEl("selectAll").addEventListener("change", (event) => {
   const search = managerEl("search").value.toLowerCase().trim();
   leadRecords.forEach((record, index) => {
-    const searchable = `${record[2]} ${record[3]} ${normalizePhone(record)}`.toLowerCase();
+    const searchable = `${record[2]} ${record[3]} ${normalizePhone(record)} ${normalizeEmail(record)}`.toLowerCase();
     if (!search || searchable.includes(search)) {
       if (event.target.checked) selectedLeads.add(index);
       else selectedLeads.delete(index);
@@ -245,6 +278,63 @@ for (const [buttonId, nextStatus] of [["markDone", "Contacted"], ["markNew", "Ne
     showManagerMessage("Status updated locally. Click Save status changes to CSV to persist it.");
   });
 }
+
+// Staff must confirm email delivery through their approved mail system.
+// Copying an address or downloading mail merge data does NOT mark it emailed.
+for (const [buttonId, emailStatus] of [["markEmailed", "Emailed"], ["markEmailNew", "New"]]) {
+  managerEl(buttonId).addEventListener("click", () => {
+    if (!selectedLeads.size) return showManagerMessage("Select one or more leads first.", "err");
+    if (emailStatus === "Emailed" && !window.confirm(
+      `Confirm email was actually sent to all ${selectedLeads.size} selected leads through an approved mail system?`
+    )) return;
+    for (const index of selectedLeads) leadRecords[index][11] = emailStatus;
+    selectedLeads.clear();
+    unsavedChanges = true;
+    managerEl("selectAll").checked = false;
+    renderDashboard();
+    showManagerMessage("Email follow-up status updated locally. Click Save changes to CSV to persist it.");
+  });
+}
+
+function escapeEmailExportCell(value) {
+  const cell = String(value ?? "").replace(/[\r\n\t]+/g, " ").trim();
+  const safe = /^[=+@-]/.test(cell) ? "'" + cell : cell;
+  return /[",]/.test(safe) ? '"' + safe.replace(/"/g, '""') + '"' : safe;
+}
+
+managerEl("copyEmails").addEventListener("click", async () => {
+  const emails = managerEl("emailAddresses").value;
+  if (!emails) return showManagerMessage("No eligible unique email addresses to copy.", "err");
+  try {
+    if (navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(emails);
+    else {
+      managerEl("emailAddresses").focus();
+      managerEl("emailAddresses").select();
+      if (!document.execCommand("copy")) throw new Error("Copy unavailable");
+    }
+    showManagerMessage("Copied addresses. Use BCC only in an approved mail account; copying does not mark recipients Emailed.");
+  } catch (error) {
+    showManagerMessage("Copy unavailable. Select the BCC addresses and copy manually.", "err");
+  }
+});
+
+managerEl("emailCSV").addEventListener("click", () => {
+  const eligible = eligibleForEmail();
+  if (!eligible.length) return showManagerMessage("No eligible unique emails for a mail merge.", "err");
+  const rows = [["FirstName", "LastName", "Email", "GraduationYear"], ...eligible.map((r) => [
+    r[2], r[3], normalizeEmail(r), r[7]
+  ])];
+  const csv = "\uFEFF" + rows.map((row) => row.map(escapeEmailExportCell).join(",")).join("\r\n") + "\r\n";
+  const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "Recruiting_Email_Mail_Merge.csv";
+  document.body.append(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  showManagerMessage("Mail-merge CSV prepared with names, email, and graduation year only. Check the approved mail system before importing.");
+});
 
 // Save to the existing CSV. Refuse to overwrite changes made after it was opened.
 // The browser's file permission is local; the file itself has no authentication.

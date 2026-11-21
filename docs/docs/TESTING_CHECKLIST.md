@@ -47,3 +47,9 @@ Work with **fictional contacts or numbers you control**. Use a fresh copy of the
 - [ ] Select a fictional lead, choose **Delete selected**, cancel; confirm no data is lost.
 - [ ] Choose **Delete selected** again, confirm; reload the file and verify only the chosen lead is gone.
 - [ ] With a lead CSV open in staff manager, modify it using an external process and then attempt a status write; confirm the dashboard refuses to overwrite the newer file.
+
+
+### Email follow-up (fictional demo only)
+- [ ] Email addresses are visible in the staff dashboard.
+- [ ] Downloaded mail-merge CSV excludes phone numbers and DOB.
+- [ ] Marking demo leads Emailed does not mark their SMS status Contacted.

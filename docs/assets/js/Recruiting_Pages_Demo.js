@@ -5,13 +5,13 @@
  */
 (function () {
   'use strict';
-  const KEY = 'recruiting-pages-demo-leads-v1';
-  const HEADERS = 'Submission ID,Submitted At,First Name,Last Name,Phone,Email,Date of Birth,Graduation Year,Text Consent,Contact Status,Source';
+  const KEY = 'recruiting-pages-demo-leads-v2';
+  const HEADERS = 'Submission ID,Submitted At,First Name,Last Name,Phone,Email,Date of Birth,Graduation Year,Text Consent,Contact Status,Source,Email Status';
   const EXAMPLE_CSV = [
     HEADERS,
-    'demo-alex,2026-11-21T16:00:00.000Z,Alex,Carter,2025550101,alex@example.com,2008-05-12,2027,Yes,New,Demo only',
-    'demo-jordan,2026-11-21T16:00:00.000Z,Jordan,Lee,2025550102,jordan@example.com,2009-02-17,2028,Yes,New,Demo only',
-    'demo-taylor,2026-11-21T16:00:00.000Z,Taylor,Reed,2025550103,taylor@example.com,2008-11-02,2027,Yes,New,Demo only'
+    'demo-alex,2026-11-21T16:00:00.000Z,Alex,Carter,2025550101,alex@example.com,2008-05-12,2027,Yes,New,Demo only,New',
+    'demo-jordan,2026-11-21T16:00:00.000Z,Jordan,Lee,2025550102,jordan@example.com,2009-02-17,2028,Yes,New,Demo only,New',
+    'demo-taylor,2026-11-21T16:00:00.000Z,Taylor,Reed,2025550103,taylor@example.com,2008-11-02,2027,Yes,New,Demo only,New'
   ].join('\r\n') + '\r\n';
 
   try {

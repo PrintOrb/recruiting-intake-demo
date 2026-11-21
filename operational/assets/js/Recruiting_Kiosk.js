@@ -17,7 +17,7 @@ const kioskConfig = window.RECRUITING_CONFIG;
 const KIOSK_HEADERS = [
   "Submission ID", "Submitted At", "First Name", "Last Name", "Phone",
   "Email", "Date of Birth", "Graduation Year", "Text Consent",
-  "Contact Status", "Source"
+  "Contact Status", "Source", "Email Status"
 ];
 
 let leadFileHandle = null;
@@ -85,10 +85,18 @@ function parseKioskCSV(text) {
 async function loadKioskRows() {
   const file = await leadFileHandle.getFile();
   const rows = parseKioskCSV(await file.text());
-  if (!rows.length || KIOSK_HEADERS.some((header, index) => rows[0][index] !== header)) {
+  // Old versions had eleven columns. Add Email Status when first saved,
+  // preserving all existing records and SMS statuses.
+  const legacyHeaders = KIOSK_HEADERS.slice(0, -1);
+  const header = rows[0] || [];
+  const modern = KIOSK_HEADERS.every((value, index) => header[index] === value) && header.length === KIOSK_HEADERS.length;
+  const legacy = legacyHeaders.every((value, index) => header[index] === value) && header.length === legacyHeaders.length;
+  if (!modern && !legacy) {
     throw new Error("This file has different columns. Choose " + kioskConfig.data.expectedFileName + ".");
   }
-  return rows.slice(1);
+  return rows.slice(1).filter((row) => row.some(Boolean)).map((row) =>
+    legacy ? [...row.slice(0, 11), "New"] : [...row.slice(0, 11), row[11] || "New"]
+  );
 }
 
 async function saveKioskRows(rows) {
@@ -185,7 +193,7 @@ kioskEl("interestForm").addEventListener("submit", async (event) => {
       const submissionId = Date.now() + "-" + Math.floor(Math.random() * 1e6);
       records.push([
         submissionId, new Date().toISOString(), first, last, phone, email,
-        dob, grad, "Yes", "New", kioskConfig.data.sourceLabel
+        dob, grad, "Yes", "New", kioskConfig.data.sourceLabel, "New"
       ]);
       await saveKioskRows(records);
     }

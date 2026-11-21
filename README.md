@@ -32,3 +32,20 @@ Only `/docs` is published in Pages with the recommended configuration. The non-d
 
 ## File storage
 Never check in the real `Recruiting_Leads.csv`, exports, backups or personalized text message lists. The `.gitignore` excludes these files. `.gitignore` is not a substitute for checking uploads manually.
+
+## Download a standalone version via GitHub Releases
+
+Open [Releases](https://github.com/PrintOrb/recruiting-intake-demo/releases/latest) and download the versioned `Recruiting_Intake_System_vX.Y.Z.zip` **asset**, not GitHub's auto-generated source ZIP. It contains only the non-demo kiosk, dashboard, assets, a blank header-only `Recruiting_Leads.csv`, and the optional empty Excel reporting workbook.
+
+The first release is built automatically by `.github/workflows/publish-release.yml`. For later versions, run **Actions → Publish standalone recruiting system → Run workflow** with a new version like `v1.0.1`. Never include real leads in a release.
+
+
+### Email follow-up (v1.0.0)
+
+The staff dashboard includes an email-outreach panel. Copy unique opted-in
+addresses for BCC, or download a mail-merge CSV containing FirstName, LastName,
+Email and GraduationYear, without dates of birth. Use only an approved recruiting
+mail account/service; nothing is sent automatically. Following a successful
+send, select those leads and click **Mark emailed** then **Save changes to CSV**.
+Email Status is distinct from the existing SMS Contact Status. The kiosk and
+manager can open older eleven-column CSVs and upgrade them on the next save.

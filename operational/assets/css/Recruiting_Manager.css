@@ -120,3 +120,10 @@ button.confirm-send {width:100%;margin-top:3px;}
 .qr-error {color:#a12738;margin:8px 0 0;font-size:12px;}
 .qr-error:empty {display:none;}
 @media(max-width:560px) {.qr-checklist {grid-template-columns:1fr;} .qr-confirm-head {align-items:stretch;} }
+
+/* Expanded outreach status cards / email mail merge */
+.stats {grid-template-columns:repeat(3,minmax(0,1fr));}
+#emailPanel textarea {height:104px;border-left-color:#4a7e9f;}
+#emailCount {font-weight:800;color:#204f73;}
+@media(max-width:800px){.stats {grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:450px){.stats {grid-template-columns:1fr 1fr;}}

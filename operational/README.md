@@ -13,3 +13,11 @@ This is the original v7 **working CSV-based** kiosk and staff dashboard with no 
 The application has **no login, no encryption and no server backend**; File System Access might be restricted by government browser policy. If approved internal hosting is later available, these static sources may be adapted for it, subject to security and privacy review. Do not use public GitHub Pages as the operational database or assume that code availability equals approval. Student privacy notices and consent requirements still apply.
 
 The empty CSV template is deliberately named `Recruiting_Leads_EMPTY.csv` so a future push cannot overwrite any saved records. Keep all live CSV records outside this repository.
+
+
+EMAIL FOLLOW-UP
+The staff manager can copy a BCC-only list of unique, opted-in email addresses
+or download a FirstName,LastName,Email,GraduationYear mail-merge CSV. Email
+contact status is tracked separately from text outreach. Confirm actual sends
+before marking Emailed, then save changes. No emails are sent by the tool.
+Existing 11-column lead CSV files migrate to the 12-column schema on save.

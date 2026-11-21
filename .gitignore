@@ -11,3 +11,11 @@
 *.sqlite
 .DS_Store
 Thumbs.db
+
+# Email mail-merge exports contain contact information
+**/Recruiting_Email_Mail_Merge.csv
+**/*_Mail_Merge.csv
+**/email-exports/**
+
+# Workflow-generated release artifacts (attach via Releases only)
+dist/

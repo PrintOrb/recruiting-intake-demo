@@ -70,3 +70,11 @@ Before using real student information, especially minors' DOB, obtain authorizat
 Batches snapshot submission IDs and normalized phone numbers as well as the line of QR text (`FirstName|PhoneNumber`). The staff dashboard confirms selected sent recipients, matches them by submission ID + number, changes their `Contact Status` to `Contacted`, and writes the CSV immediately. No automatic phone-to-PC notification or delivery receipt is implied. Unchecked recipients remain `New` and are included when QR batches are regenerated.
 
 The **Delete selected** button removes selected rows permanently after a confirmation dialog and saves the CSV immediately. Both batch confirmation and deletion compare the on-disk CSV to the last loaded/saved snapshot; they refuse to write if the file has changed outside the manager.
+
+
+## Email outreach
+Email addresses are stored in the lead CSV and displayed only in the staff
+manager. The final CSV column `Email Status` is `New` or `Emailed` independently
+of `Contact Status` (SMS). Older eleven-column CSVs are supported and migrated
+on their next save. CSV export includes first/last name, email and graduation
+year; BCC copy is a semicolon-separated list. This site does not send email.

@@ -44,3 +44,12 @@ VERSION 6 CONTACT TRACKING:
 - Click Confirm sent / mark contacted to save their statuses immediately.
 - To remove a lead, select its checkbox in the staff table and click Delete selected.
 - Scanning alone does NOT synchronize the two devices; staff must confirm successful sends.
+
+
+EMAIL OUTREACH:
+- Open the staff dashboard and copy unique BCC addresses, or download a
+  mail-merge CSV for personalized follow-up from an approved email account.
+- Email status is tracked separately from SMS; mark Emailed only after the
+  approved mail system confirms sending, then Save changes to CSV.
+- Existing CSV files from earlier versions automatically gain the new
+  Email Status column on their first save. Back up the original file first.

@@ -56,7 +56,7 @@
 </div>
 <div class="stat">
 <span>
-       Already contacted
+       Texted
       </span>
 <strong id="contacted">
        0
@@ -69,6 +69,14 @@
 <strong id="duplicates">
        0
       </strong>
+</div>
+<div class="stat">
+<span>Ready to email</span>
+<strong id="emailEligible">0</strong>
+</div>
+<div class="stat">
+<span>Emailed</span>
+<strong id="emailed">0</strong>
 </div>
 </div>
 <!-- SMS EXPORT: generates FirstName|PhoneNumber lines, and offline QR batches -->
@@ -98,6 +106,23 @@
 <textarea id="smsText" placeholder="No eligible leads" readonly="" spellcheck="false"></textarea>
 <div class="muted">After sending messages, confirm the completed recipients in the QR batch window to update their contact status.</div>
 </section>
+<!-- EMAIL EXPORT: email follow-up is separate from SMS contact status -->
+<section class="panel" id="emailPanel">
+<div class="panel-overline">EMAIL / FOLLOW-UP</div>
+<div class="row">
+<div>
+<h2>Email outreach</h2>
+<div class="muted">Only unique addresses with recorded contact consent and status New are included. Email outreach is tracked separately from texts.</div>
+</div>
+<div class="actions">
+<button id="copyEmails">Copy BCC addresses</button>
+<button class="secondary" id="emailCSV">Download mail-merge CSV</button>
+</div>
+</div>
+<textarea id="emailAddresses" aria-label="BCC-ready email addresses" placeholder="No eligible email addresses" readonly spellcheck="false"></textarea>
+<div class="muted" id="emailCount">0 unique addresses ready for follow-up</div>
+<div class="muted">Use an authorized recruiting email account. BCC prevents exposing the entire address list; for personalized emails, import the CSV into an approved mail-merge tool. After sending, select the leads below and mark Emailed.</div>
+</section>
 <section class="panel"><div class="panel-overline">CONTACTS / RECORDS</div>
 <div class="row">
 <div>
@@ -105,10 +130,10 @@
         Student lead records
        </h2>
 <div class="muted">
-        Select records to mark contacted, return to New, or permanently remove. Deletion requires confirmation and saves to the CSV immediately.
+        Select records to update SMS or email follow-up, or permanently remove. Deletion requires confirmation and saves to the CSV immediately.
        </div>
 </div>
-<input id="search" placeholder="Search name or phone" type="search"/>
+<input id="search" placeholder="Search name, phone or email" type="search"/>
 </div>
 <div class="tablewrap">
 <table>
@@ -123,6 +148,7 @@
 <th>
           Phone
          </th>
+<th>Email</th>
 <th>
           Grad year
          </th>
@@ -130,8 +156,9 @@
           Consent
          </th>
 <th>
-          Status
+          SMS status
          </th>
+<th>Email status</th>
 <th>
           Flag
          </th>
@@ -155,6 +182,8 @@
 <button class="secondary" id="markNew">
         Mark new
        </button>
+<button class="secondary" id="markEmailed">Mark emailed</button>
+<button class="secondary" id="markEmailNew">Email: reset to New</button>
 <button class="danger" id="deleteSelected">
         Delete selected
        </button>

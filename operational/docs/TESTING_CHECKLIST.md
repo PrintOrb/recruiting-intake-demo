@@ -47,3 +47,11 @@ Work with **fictional contacts or numbers you control**. Use a fresh copy of the
 - [ ] Select a fictional lead, choose **Delete selected**, cancel; confirm no data is lost.
 - [ ] Choose **Delete selected** again, confirm; reload the file and verify only the chosen lead is gone.
 - [ ] With a lead CSV open in staff manager, modify it using an external process and then attempt a status write; confirm the dashboard refuses to overwrite the newer file.
+
+
+### Email follow-up
+- [ ] Copy BCC addresses omits any duplicate/invalid emails and nonconsenting leads.
+- [ ] Download mail-merge CSV includes FirstName, LastName, Email, GraduationYear only.
+- [ ] Mark Emailed changes email status only after confirmation; save CSV.
+- [ ] SMS status and QR eligibility remain unchanged when email is marked Emailed.
+- [ ] Legacy 11-column CSV opens and expands with Email Status on next save.
