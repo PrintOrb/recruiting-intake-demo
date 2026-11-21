@@ -23,3 +23,5 @@ This application is not an officially approved government information system. Be
   a new `Email Status` column when the next save is made.
 - Email exports exclude phone numbers and date of birth. No email is sent by
   the application; use an authorized recruiting email account.
+
+- The next build includes an automatic 20-second kiosk background slideshow, with a 1.8-second crossfade and editable photo treatments.

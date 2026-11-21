@@ -13,6 +13,71 @@
 window.applyRecruitingConfig();
 const kioskConfig = window.RECRUITING_CONFIG;
 
+// Timed, noninteractive background slideshow; does not modify form or CSV state.
+function applyKioskBackgroundShuffle() {
+  const shuffle = kioskConfig.kiosk && kioskConfig.kiosk.backgroundShuffle;
+  if (!shuffle || !shuffle.enabled || !Array.isArray(shuffle.images)) return;
+  const images = shuffle.images.filter((path) => typeof path === "string" && path.trim());
+  if (!images.length) return;
+  const styles = Array.isArray(shuffle.presets) ? shuffle.presets : [];
+  const intervalMs = Math.max(5000, Number(shuffle.intervalSeconds || 20) * 1000);
+  const fadeMs = Math.max(0, Math.min(intervalMs - 1000, Number(shuffle.fadeSeconds ?? 1.8) * 1000));
+  const overlay = 'linear-gradient(90deg, rgba(3,12,23,.73) 0%, rgba(3,14,27,.57) 31%, rgba(2,11,22,.42) 57%, rgba(3,12,25,.62) 100%), linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.32)), ';
+
+  const stage = document.createElement("div");
+  stage.className = "kiosk-background-rotator";
+  stage.setAttribute("aria-hidden", "true");
+  const layers = [document.createElement("div"), document.createElement("div")];
+  for (const layer of layers) {
+    layer.className = "kiosk-background-layer";
+    layer.style.transitionDuration = fadeMs + "ms";
+    stage.appendChild(layer);
+  }
+  document.body.prepend(stage);
+
+  function decorate(layer, index) {
+    const preset = styles[index] || {};
+    layer.style.backgroundImage = overlay + 'url("' + encodeURI(images[index]).replace(/"/g, "%22") + '")';
+    layer.style.backgroundPosition = preset.position || "center center";
+    layer.style.transform = "scale(" + (Number(preset.scale) || 1) + ")";
+    layer.style.filter = preset.filter || "none";
+  }
+
+  let index = Math.floor(Math.random() * images.length);
+  let front = 0;
+  let switching = false;
+  decorate(layers[front], index);
+  layers[front].classList.add("is-visible");
+  if (images.length < 2 || shuffle.mode !== "timed") return;
+
+  function cycle() {
+    if (document.hidden || switching) return;
+    switching = true;
+    const next = (index + 1) % images.length;
+    const incoming = 1 - front;
+    const preload = new Image();
+    preload.onload = () => {
+      decorate(layers[incoming], next);
+      layers[incoming].style.zIndex = "1";
+      layers[front].style.zIndex = "0";
+      requestAnimationFrame(() => {
+        layers[incoming].classList.add("is-visible");
+        window.setTimeout(() => {
+          layers[front].classList.remove("is-visible");
+          index = next;
+          front = incoming;
+          switching = false;
+        }, fadeMs + 50);
+      });
+    };
+    preload.onerror = () => { switching = false; };
+    preload.src = images[next];
+  }
+  window.setInterval(cycle, intervalMs);
+}
+
+applyKioskBackgroundShuffle();
+
 // KEEP IN SYNC with the column order in Recruiting_Manager.js and the CSV.
 const KIOSK_HEADERS = [
   "Submission ID", "Submitted At", "First Name", "Last Name", "Phone",

@@ -49,3 +49,7 @@ mail account/service; nothing is sent automatically. Following a successful
 send, select those leads and click **Mark emailed** then **Save changes to CSV**.
 Email Status is distinct from the existing SMS Contact Status. The kiosk and
 manager can open older eleven-column CSVs and upgrade them on the next save.
+
+### Timed student background slideshow
+
+The student page automatically cycles through three Air Force-inspired photo treatments every 20 seconds, with a 1.8-second crossfade. Configure the slideshow in each build's `assets/js/Recruiting_Config.js`; the form and CSV workflows are unchanged.

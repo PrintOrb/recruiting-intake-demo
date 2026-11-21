@@ -108,3 +108,7 @@ A field like "school name" is **not** merely a visual edit. You must coordinate 
 - For different event photo backgrounds replace `assets/images/Kiosk_Background.jpg` with a new image (same filename), or change `--kiosk-bg-image` in `assets/css/Recruiting_Kiosk.css`.
 - The browser uses locally installed system fonts, so it still works offline. If a condensed font isn't installed, the browser uses a fallback.
 - Test readability after every background swap and run `docs/TESTING_CHECKLIST.md` before using the form.
+
+### Timed student background slideshow
+
+The student kiosk cycles through three visual treatments of `assets/images/Kiosk_Background.jpg` every 20 seconds with a 1.8-second crossfade. Change `kiosk.backgroundShuffle.intervalSeconds`, `fadeSeconds`, `images`, or `presets` in `assets/js/Recruiting_Config.js`. You can replace the repeated paths with different locally stored approved images. The animation is decorative and never affects the intake form.

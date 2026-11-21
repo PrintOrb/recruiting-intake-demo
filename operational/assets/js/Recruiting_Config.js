@@ -28,6 +28,25 @@
       formDescription: "One minute. One first step. Enter your information to hear from a recruiter.",
       successTitle: "Mission received.",
       successDescription: "Your information has been received. Thanks for taking the first step.",
+      backgroundShuffle: {
+        enabled: true,
+        mode: "timed",
+        intervalSeconds: 20,
+        fadeSeconds: 1.8,
+        // Replace entries with additional local images to customize the rotation.
+        images: [
+          "assets/images/Kiosk_Background.jpg",
+          "assets/images/Kiosk_Background.jpg",
+          "assets/images/Kiosk_Background.jpg"
+        ],
+        // Three appearances using the included photo. No extra downloads.
+        presets: [
+          { position: "center center", scale: 1, filter: "none" },
+          { position: "35% center", scale: 1.12, filter: "saturate(1.22) contrast(1.08)" },
+          { position: "68% center", scale: 1.16, filter: "saturate(.72) contrast(1.13) brightness(.91)" }
+        ]
+      },
+
 
       // IMPORTANT: Obtain approval for this contact language and the associated
       // privacy notice, including any rules for students under 18.
