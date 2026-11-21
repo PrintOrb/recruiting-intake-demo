@@ -135,3 +135,16 @@ button.demo-reset {width:auto;font-size:12px;padding:8px 12px;background:#496881
 #emailCount {font-weight:800;color:#204f73;}
 @media(max-width:800px){.stats {grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:450px){.stats {grid-template-columns:1fr 1fr;}}
+
+
+/* Staff-only birthday insights. */
+.birthday-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px;}
+.birthday-item {display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;background:#f7fafc;border:1px solid #dce6ef;border-left:3px solid var(--brand-primary);}
+.birthday-person {display:flex;flex-direction:column;gap:4px;min-width:0;}
+.birthday-person strong {color:#153651;font-size:14px;overflow-wrap:anywhere;}
+.birthday-person span {color:#60778d;font-size:12px;}
+.birthday-pill {flex:none;background:#e9f1fb;color:#215a91;padding:7px 9px;font-size:10px;font-weight:900;letter-spacing:.045em;}
+.birthday-pill.birthday-today {background:#d9f3e6;color:#12613f;}
+.birthday-inline-note {display:block;margin-top:5px;color:#2169a0;font-size:10px;font-weight:800;white-space:nowrap;}
+@media(max-width:650px){.birthday-grid {grid-template-columns:1fr;}}
+@media(min-width:1001px){.stats {grid-template-columns:repeat(4,minmax(0,1fr));}}

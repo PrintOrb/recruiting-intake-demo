@@ -84,7 +84,21 @@
 <span>Emailed</span>
 <strong id="emailed">0</strong>
 </div>
+<div class="stat"><span>Birthdays · next 30 days</span><strong id="birthdayCount">0</strong></div>
+<div class="stat"><span>Average age</span><strong id="averageAge">—</strong></div>
 </div>
+
+<section class="panel birthday-panel" aria-labelledby="birthdayHeading">
+<div class="panel-overline">LEADS / BIRTHDAY OVERVIEW</div>
+<div class="row">
+<div>
+<h2 id="birthdayHeading">Upcoming birthdays</h2>
+<div class="muted">Ages and upcoming birthdays are calculated from the stored date of birth. No automatic birthday messages are sent.</div>
+</div>
+<div class="muted" id="birthdaySummary">None in the next 30 days</div>
+</div>
+<div class="birthday-grid" id="birthdayList"></div>
+</section>
 <!-- SMS EXPORT: generates FirstName|PhoneNumber lines, and offline QR batches -->
 <section class="panel"><div class="panel-overline">OUTREACH / COMMUNICATIONS</div>
 <div class="row">
@@ -155,6 +169,8 @@
           Phone
          </th>
 <th>Email</th>
+<th>Age</th>
+<th>Birthday</th>
 <th>
           Grad year
          </th>

@@ -123,11 +123,93 @@ function eligibleForEmail() {
   });
 }
 
+
+// Derived only for the staff dashboard. DOB stays unchanged in the CSV.
+// Age follows the local calendar date. Feb 29 birthdays are shown as Mar 1
+// in non-leap years for display, not for legal eligibility decisions.
+
+function birthdayInformation(dob, today = new Date()) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(dob || ""));
+  if (!match) return null;
+  const birthYear = Number(match[1]);
+  const birthMonth = Number(match[2]);
+  const birthDay = Number(match[3]);
+  const birthDate = new Date(birthYear, birthMonth - 1, birthDay);
+  if (birthYear < 1900 || birthDate.getFullYear() !== birthYear ||
+      birthDate.getMonth() !== birthMonth - 1 || birthDate.getDate() !== birthDay) return null;
+  const now = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  if (birthDate > now) return null;
+  const observedBirthday = (year) => {
+    const isLeap = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+    return birthMonth === 2 && birthDay === 29 && !isLeap
+      ? new Date(year, 2, 1)
+      : new Date(year, birthMonth - 1, birthDay);
+  };
+  let next = observedBirthday(now.getFullYear());
+  const thisYearsBirthday = next;
+  if (next < now) next = observedBirthday(now.getFullYear() + 1);
+  const age = now.getFullYear() - birthYear - (now < thisYearsBirthday ? 1 : 0);
+  const todayUTC = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+  const nextUTC = Date.UTC(next.getFullYear(), next.getMonth(), next.getDate());
+  const daysUntil = Math.round((nextUTC - todayUTC) / 86400000);
+  const birthdayLabel = birthDate.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  const nextLabel = next.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  return {age,birthdayLabel,nextLabel,daysUntil,turningAge:next.getFullYear()-birthYear};
+}
+
+function renderUpcomingBirthdays(today) {
+  const upcoming = leadRecords.map((record) => ({
+    record, info: birthdayInformation(record[6], today)
+  })).filter((entry) => entry.info && entry.info.daysUntil <= 30)
+    .sort((a,b) => a.info.daysUntil-b.info.daysUntil ||
+      String(a.record[2]).localeCompare(String(b.record[2])));
+  managerEl("birthdayCount").textContent = String(upcoming.length);
+  managerEl("birthdaySummary").textContent = upcoming.length
+    ? `${upcoming.length} in the next 30 days` : "None in the next 30 days";
+  const list=managerEl("birthdayList");
+  list.replaceChildren();
+  if (!upcoming.length) {
+    const empty=document.createElement("p");
+    empty.className="muted";
+    empty.textContent="No upcoming birthdays in the next 30 days.";
+    list.append(empty);return;
+  }
+  for (const {record,info} of upcoming.slice(0,10)) {
+    const item=document.createElement("div");
+    item.className="birthday-item";
+    const identity=document.createElement("div");
+    identity.className="birthday-person";
+    const name=document.createElement("strong");
+    name.textContent=`${record[2]} ${record[3]}`.trim();
+    const detail=document.createElement("span");
+    detail.textContent=`Turns ${info.turningAge} · ${info.nextLabel}`;
+    identity.append(name,detail);
+    const badge=document.createElement("span");
+    badge.className="birthday-pill"+(info.daysUntil===0?" birthday-today":"");
+    badge.textContent=info.daysUntil===0?"TODAY":`IN ${info.daysUntil} ${info.daysUntil===1?"DAY":"DAYS"}`;
+    item.append(identity,badge);
+    list.append(item);
+  }
+  if(upcoming.length>10){
+    const remaining=document.createElement("p");
+    remaining.className="muted";
+    remaining.textContent=`And ${upcoming.length-10} more — see the birthday column in the lead table.`;
+    list.append(remaining);
+  }
+}
+
 // Render with textContent, never row.innerHTML (records are untrusted input).
 function renderDashboard() {
   const counts = countPhoneNumbers();
   const eligible = eligibleForText();
   const emailEligible = eligibleForEmail();
+  const today = new Date();
+  renderUpcomingBirthdays(today);
+  const validAges = leadRecords.map(record => birthdayInformation(record[6], today))
+    .filter(Boolean).map(info => info.age);
+  managerEl("averageAge").textContent = validAges.length
+    ? (validAges.reduce((sum, age) => sum + age, 0) / validAges.length).toFixed(1)
+    : "—";
 
   managerEl("total").textContent = leadRecords.length;
   managerEl("eligible").textContent = eligible.length;
@@ -177,6 +259,21 @@ function renderDashboard() {
     appendCell(`${record[2]} ${record[3]}`.trim());
     appendCell(record[4]);
     appendCell(record[5]);
+    const birthday=birthdayInformation(record[6],today);
+    appendCell(birthday ? String(birthday.age) : "—");
+    const birthdayCell=document.createElement("td");
+    if(birthday){
+      const dateLabel=document.createElement("span");
+      dateLabel.textContent=birthday.birthdayLabel;
+      birthdayCell.append(dateLabel);
+      if(birthday.daysUntil<=30){
+        const note=document.createElement("span");
+        note.className="birthday-inline-note";
+        note.textContent=birthday.daysUntil===0?"Today":`In ${birthday.daysUntil}d`;
+        birthdayCell.append(note);
+      }
+    } else {birthdayCell.textContent="—";}
+    tableRow.append(birthdayCell);
     appendCell(record[7]);
 
     const consentCell = document.createElement("td");
@@ -208,7 +305,7 @@ function renderDashboard() {
   if (!shown) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
-    cell.colSpan = 10;
+    cell.colSpan = 12;
     cell.textContent = "No records match.";
     row.append(cell);
     tableBody.append(row);
