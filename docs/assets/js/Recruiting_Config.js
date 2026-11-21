@@ -33,17 +33,12 @@
         mode: "timed",
         intervalSeconds: 20,
         fadeSeconds: 1.8,
-        // Replace entries with additional local images to customize the rotation.
+        // Each photograph is a distinct, real public-domain DVIDS image.
+        // See PHOTO_CREDITS.md for photographers and source links.
         images: [
-          "assets/images/Kiosk_Background.jpg",
-          "assets/images/Kiosk_Background.jpg",
-          "assets/images/Kiosk_Background.jpg"
-        ],
-        // Three appearances using the included photo. No extra downloads.
-        presets: [
-          { position: "center center", scale: 1, filter: "none" },
-          { position: "35% center", scale: 1.12, filter: "saturate(1.22) contrast(1.08)" },
-          { position: "68% center", scale: 1.16, filter: "saturate(.72) contrast(1.13) brightness(.91)" }
+          "assets/images/AF_F35_Takeoff.jpg",
+          "assets/images/AF_C17_Golden_Hour.jpg",
+          "assets/images/AF_Cyber_Operations.jpg"
         ]
       },
 
