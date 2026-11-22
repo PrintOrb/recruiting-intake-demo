@@ -18,7 +18,7 @@ Recruiting Intake System is a browser-based prototype that replaces handwritten 
 
 | Student kiosk | Recruiter dashboard |
 |:--|:--|
-| Contact information and explicit consent | Lead search, duplicate-number review, status management |
+| Contact information and optional outreach consent | Lead search, duplicate-number review, status management |
 | Date of birth and graduation year | Calculated age and upcoming birthdays |
 | Rotating, credited military photography | QR batches for a companion iPhone Shortcut |
 | Browser-based workflow | Email BCC list and limited mail-merge CSV |

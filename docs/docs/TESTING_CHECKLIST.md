@@ -22,3 +22,9 @@
 ## Safety
 - [ ] No real lead CSV, student contact details, or credentials appear in the repository or demo.
 - [ ] For the CSV-based edition use the separate `operational/docs/TESTING_CHECKLIST.md`.
+
+## Optional outreach consent
+
+- [ ] With the separate **fictional-data confirmation** checked, submit a fictional lead without outreach consent. The record should save as `No` and never appear in eligible SMS or email exports.
+- [ ] Submit a distinct fictional lead with outreach consent checked. It should save as `Yes` and be eligible only when all other outreach checks pass.
+- [ ] Leave the required **fictional-data confirmation** unchecked and verify that the public demo will not submit.

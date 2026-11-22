@@ -220,6 +220,7 @@ kioskEl("interestForm").addEventListener("submit", async (event) => {
   const email = kioskEl("email").value.trim();
   const dob = kioskEl("dob").value;
   const grad = kioskEl("grad").value;
+  const wantsContact = kioskEl("consent").checked;
 
   try {
     if (!/^[\p{L}][\p{L} .'-]{0,59}$/u.test(first) ||
@@ -241,9 +242,6 @@ kioskEl("interestForm").addEventListener("submit", async (event) => {
     if (!/^\d{4}$/.test(grad) || Number(grad) < minYear || Number(grad) > maxYear) {
       throw new Error("Enter a four-digit graduation year.");
     }
-    if (!kioskEl("consent").checked) {
-      throw new Error("You must agree to be contacted before submitting.");
-    }
 
     button.disabled = true;
     button.textContent = "Saving...";
@@ -258,7 +256,7 @@ kioskEl("interestForm").addEventListener("submit", async (event) => {
       const submissionId = Date.now() + "-" + Math.floor(Math.random() * 1e6);
       records.push([
         submissionId, new Date().toISOString(), first, last, phone, email,
-        dob, grad, "Yes", "New", kioskConfig.data.sourceLabel, "New"
+        dob, grad, wantsContact ? "Yes" : "No", "New", kioskConfig.data.sourceLabel, "New"
       ]);
       await saveKioskRows(records);
     }

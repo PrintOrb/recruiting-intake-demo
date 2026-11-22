@@ -121,10 +121,12 @@
 </div>
 </div>
 <div class="checkrow">
-<input id="consent" required="" type="checkbox"/>
+<input id="consent" type="checkbox"/>
 <label data-config="kiosk.consentText" for="consent">
 </label>
 </div>
+<p class="consent-explainer">Optional. If you do not check this box, your submission will still be saved, but you will not be included in recruiter SMS or email outreach lists.</p>
+<div class="checkrow demo-attestation"><input id="demoAttest" type="checkbox" required/><label for="demoAttest">Required: I confirm that these are fictional test details, not a real student’s information.</label></div>
 <div class="msg err hidden" id="error" role="alert">
 </div>
 <button class="primary-action" id="submitBtn" type="submit">

@@ -333,3 +333,7 @@ footer {
 .demo-nav a:hover {color:#fff;}
 button.demo-reset {width:auto;font-size:12px;padding:8px 12px;background:#496881;border:1px solid #b9cee0;}
 @media(max-width:520px){.demo-nav{gap:9px;flex-wrap:wrap;padding:12px 16px}.public-demo-banner{font-size:10px}}
+
+/* Optional outreach consent; demo data attestation remains separately required. */
+.consent-explainer{font-size:12px;line-height:1.5;color:#465b70;margin:5px 0 16px;max-width:520px}
+.demo-attestation{margin:12px 0 16px}

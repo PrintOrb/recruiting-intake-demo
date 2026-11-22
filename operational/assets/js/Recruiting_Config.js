@@ -45,7 +45,7 @@
 
       // IMPORTANT: Obtain approval for this contact language and the associated
       // privacy notice, including any rules for students under 18.
-      consentText: "I agree to be contacted by an Air Force recruiter using the phone number or email I provided. *"
+      consentText: "Optional: I agree to be contacted by an Air Force recruiter using the phone number or email I provided."
     },
 
     staff: {

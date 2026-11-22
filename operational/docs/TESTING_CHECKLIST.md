@@ -60,3 +60,9 @@ Work with **fictional contacts or numbers you control**. Use a fresh copy of the
 - [ ] Mark Emailed changes email status only after confirmation; save CSV.
 - [ ] SMS status and QR eligibility remain unchanged when email is marked Emailed.
 - [ ] Legacy 11-column CSV opens and expands with Email Status on next save.
+
+## Optional outreach consent
+
+- [ ] With contact consent unchecked, submit a fictional lead. It must be saved with `Text Consent = No` and excluded from **both** SMS and email exports and QR batches.
+- [ ] With contact consent checked, submit a different fictional lead. It must be saved with `Text Consent = Yes` and, if otherwise eligible, appear in permitted outreach lists.
+- [ ] Verify the consent box visibly states that it is optional. Review the consent wording with the appropriate privacy authority before any real use.

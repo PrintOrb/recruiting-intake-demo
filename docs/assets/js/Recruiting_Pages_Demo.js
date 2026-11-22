@@ -76,7 +76,6 @@
     config.brand.studentBadge = 'PUBLIC DEMONSTRATION';
     config.brand.staffBadge = 'DEMO DATA ONLY';
     config.kiosk.formDescription = 'Try the form with invented details only. Example: 202-555-0104 and alex@example.com.';
-    config.kiosk.consentText = 'I confirm these are fictional test details, not information belonging to a real student. *';
     config.kiosk.successDescription = 'Your fictional entry was added to this browser’s demo records. No information was submitted to the Air Force.';
     config.data.sourceLabel = 'Demo only';
   }

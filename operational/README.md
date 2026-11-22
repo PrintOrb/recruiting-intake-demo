@@ -22,6 +22,6 @@ This standalone edition reads and writes a staff-selected local CSV file. Unlike
 - `docs/DEPLOYMENT_CHECKLIST.md` — pre-deployment authorization and privacy review
 - `Recruiting_Excel_Tracker.xlsx` — optional **blank** workbook; not automatically synchronized with the CSV
 
-The lead CSV has separate SMS and email statuses. The manager can read earlier eleven-column CSVs and extend them on save. Ages and upcoming birthdays are calculated from stored DOB and are not written as duplicate fields.
+Contact permission is optional at submission; records without affirmative consent are saved with `Text Consent = No` and excluded from both SMS and email exports. The CSV column name is retained for backward compatibility. The lead CSV has separate SMS and email statuses. The manager can read earlier eleven-column CSVs and extend them on save. Ages and upcoming birthdays are calculated from stored DOB and are not written as duplicate fields.
 
 **Limitations:** no login, encryption, or server backend. Managed-device policy may prevent local file access. Approval for student data and the mobile Shortcut workflow must be obtained independently. Never put real student records on GitHub or the public demonstration.
