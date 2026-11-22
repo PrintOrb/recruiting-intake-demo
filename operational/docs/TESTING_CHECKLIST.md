@@ -25,11 +25,16 @@ Work with **fictional contacts or numbers you control**. Use a fresh copy of the
 - [ ] Verify the export line is `FirstName|10DigitPhone` (name **first**).
 - [ ] Use **Show QR for iPhone**, scan with a test Shortcut/device, and verify the decoded text matches the export.
 - [ ] Add enough fictional leads to create two QR batches; use **Next batch** and **Previous batch**.
-- [ ] Mark a fictional person `Contacted`, click **Save status changes**, and reload. Confirm they are excluded from text/QR exports.
+- [ ] Mark a fictional person `Contacted`, click **Save changes to CSV**, and reload. Confirm they are excluded from text/QR exports.
 - [ ] Add two fictional people with the same phone; confirm **neither** appears in the SMS export (shared-number review).
 - [ ] Verify both pages remain usable after browser reload and reselecting the CSV.
 
 ## Before any authorized event
+
+- [ ] All standalone screens visibly identify this software as an independent prototype, not an official U.S. Air Force product.
+- [ ] Test three distinct bundled military background photos offline, including credits.
+- [ ] Verify the iCloud Shortcut installer and its QR with a permitted test phone.
+- [ ] Verify individual age, birthday and upcoming-birthday displays using fictional DOBs.
 
 - [ ] Confirm permission to use these devices, storage and data-transfer methods.
 - [ ] Verify the privacy notice, contact consent wording, and any parental requirements.

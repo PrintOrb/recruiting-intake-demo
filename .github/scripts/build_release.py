@@ -24,43 +24,28 @@ EXPECTED_HEADERS = [
     "Contact Status", "Source", "Email Status",
 ]
 
-README = """# Recruiting Intake System — Standalone package
+README = """# Recruiting Intake System — Standalone
 
-This download contains the complete student registration kiosk, recruiting
-staff dashboard, offline QR generator, blank lead CSV and optional Excel
-reporting workbook. There are **no preloaded leads or demonstration records**.
+**Independent prototype. Not an official U.S. Air Force or DoD application and not approved by default to collect real student data.**
 
-## Start here
-1. Extract the entire ZIP to an approved folder. Do not open HTML files
-   directly inside the ZIP archive.
-2. Open `Recruiting_Intake_Kiosk.html` in a compatible desktop Edge/Chrome
-   browser. Choose the included `Recruiting_Leads.csv` when prompted.
-3. To access existing leads, open `Recruiting_Staff_Manager.html` and choose
-   that SAME CSV file. Do not leave the CSV open in Excel during submissions.
-4. Email outreach: copy unique BCC addresses or download a mail-merge CSV with
-   name/email/graduation year. After sending using an approved email account,
-   mark selected leads Emailed and save. Email status is separate from SMS.
-5. The staff manager creates QR batches in `FirstName|PhoneNumber` format.
-   Use its **Get iPhone Shortcut** link to install the shared companion
-   shortcut. Its installation page and QR code require internet access to open
-   the Apple iCloud sharing page. Before real use, review the shortcut actions.
-6. After messages actually send, confirm the successful recipients on the
-   dashboard to mark them Contacted. Scanning alone never marks them sent.
-7. The lead dashboard displays each student's age and next birthday, plus
-   a 30-day upcoming birthday overview. It does not automatically send wishes.
-8. Edit ordinary wording and colors in `assets/js/Recruiting_Config.js`.
-   Technical and customization instructions are in `docs/`.
+This download includes the local-file student kiosk, recruiter dashboard and iPhone Shortcut installer, plus a **blank, header-only** `Recruiting_Leads.csv`. No real or demonstration lead records are included.
 
-The CSV in this archive contains headers only. The optional `.xlsx` is a
-reporting workbook; it is not synchronized automatically with the CSV.
+## Setup
+1. Extract the entire ZIP to a permitted folder (not inside a ZIP viewer).
+2. Open `Recruiting_Intake_Kiosk.html` in supported desktop Edge/Chrome, select the included blank `Recruiting_Leads.csv`, and test with fictional information.
+3. Open `Recruiting_Staff_Manager.html` and select the **same** CSV to manage student records.
+4. Use **Show QR for iPhone** for consented SMS batches. **Get iPhone Shortcut** opens `iphone-shortcut.html` with the shared iCloud link (internet required). Inspect the Shortcut before installation; confirm only contacts actually sent. Scanning does not automatically update CSV.
+5. Use authorized email accounts for email outreach, and record only messages actually sent.
+6. Ages and birthdays are calculated from DOB without extra CSV fields.
 
-## Important operational limitations
-This local-file application has no login, server-side access controls or
-at-rest encryption. It is not an officially approved government information
-system. Use with actual student information only after organizational, IT,
-privacy and managed-device approval, including consent/notice and record
-handling requirements. Never upload actual leads or DOBs to GitHub. No
-public GitHub Pages URL is an approved student-data storage location.
+## Documentation
+- `START_HERE.txt`, `docs/CUSTOMIZATION_GUIDE.md`, `docs/TECHNICAL_REFERENCE.md`
+- `docs/TESTING_CHECKLIST.md`, `docs/DEPLOYMENT_CHECKLIST.md`
+- `PHOTO_CREDITS.md` for three bundled public-domain U.S. military photos
+- Optional blank `Recruiting_Excel_Tracker.xlsx` (not synced automatically)
+
+## Security and privacy
+There is no login, backend, or at-rest encryption. The app is an unapproved prototype: actual student records and any iPhone/QR transfers require authorization for the device, approved storage, notices, contact consent, and privacy/minors requirements. Never upload actual leads to GitHub or public Pages.
 """
 
 
