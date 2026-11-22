@@ -12,7 +12,7 @@
 
   const settings = {
     brand: {
-      name: "U.S. AIR FORCE",
+      name: "RECRUITING INTAKE",
       studentSubtitle: "RECRUITING • STUDENT INTEREST",
       studentBadge: "AIM HIGH",
       staffSubtitle: "RECRUITING OPERATIONS",
