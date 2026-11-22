@@ -1,55 +1,68 @@
-# Recruiting Intake — Demo + Operational builds
+# Recruiting Intake System
 
-Two **separate** versions of the same Air Force-inspired recruiting interface. This is an unofficial software project and is not an approved government information system.
+**Independent software prototype for student-interest intake and recruiter follow-up.**
 
-## 1) `docs/` — Public GitHub Pages DEMO
-- Uses fictional test leads in the visitor's browser (localStorage), no CSV file picker or backend.
-- Public demo restricts submissions to example.com email addresses and fictional numbers in the 202-555-01XX range.
-- Includes student kiosk, staff dashboard, QR batches, and confirmation / contact tracking simulations.
-- Do not enter real student information or send texts to demo numbers.
-- The student and staff demo pages share the same browser's local demo records. Different devices won't share records.
+> **Unofficial project.** This is **not** an official U.S. Air Force or Department of Defense website, application, or approved information system. Air Force-inspired styling and credited public-domain military photography do **not** imply endorsement. **Do not enter real student information into the public demo.** Any use of the standalone edition with real records requires appropriate organizational, IT, privacy, and device authorization.
 
-## 2) `operational/` — Non-demo local-file build
-- Includes the original v7 kiosk/dashboard using the browser's File System Access API to read/write an approved CSV file.
-- No real student records and no demo dataset are committed to this repository.
-- This source is deliberately **outside** the published GitHub Pages directory.
-- It is not ready to use with real student information until deployment, endpoint/browser permissions, privacy notice, consent, record retention and device/SMS transfer have been approved by the appropriate Air Force personnel.
-- Read `operational/README.md` before any deployment.
+[Explore the fictional-data demo](https://printorb.github.io/recruiting-intake-demo/) · [Download the latest standalone release](https://github.com/PrintOrb/recruiting-intake-demo/releases/latest) · [Read release notes](RELEASE_NOTES.md)
 
-## Publishing the demo with GitHub Pages
-1. Upload this repository's contents to the `main` branch.
-2. Open Settings → Pages → Build and deployment → Source: **Deploy from a branch**.
-3. Choose `main`, folder **`/docs`**, then Save.
-4. Public demonstration homepage: `https://printorb.github.io/recruiting-intake-demo/`.
+## Overview
 
-Only `/docs` is published in Pages with the recommended configuration. The non-demo source code may still be viewed in the public repository; do not place student data, keys or passwords anywhere in this repo.
+This local-first prototype offers a student registration kiosk and a separate recruiter dashboard.
 
-## Updating
-- Common editable text and colors: `assets/js/Recruiting_Config.js` inside the relevant build.
-- CSS and HTML are organized under each build folder.
-- SMS format remains `FirstName|PhoneNumber` (one per line); do not reverse it.
-- Run the smoke tests after changes; do not modify `Offline_QR.js` without reviewing license and compatibility.
+| Feature | Details |
+| --- | --- |
+| Student intake | Contact details, date of birth, graduation year, and contact consent |
+| Lead management | CSV-based review, duplicate-number review, deletion, and follow-up tracking |
+| Age and birthdays | Individual age and birthdays coming up in the next 30 days |
+| SMS preparation | QR batches containing `FirstName\|PhoneNumber`, with manual confirmation of recipients actually contacted |
+| Email follow-up | BCC-ready addresses and a limited mail-merge CSV, with separate email status |
+| iPhone Shortcut | Optional companion Shortcut installer linked to Apple iCloud |
+| Photography | Three distinct, credited public-domain U.S. military photographs rotating every 20 seconds |
 
-## File storage
-Never check in the real `Recruiting_Leads.csv`, exports, backups or personalized text message lists. The `.gitignore` excludes these files. `.gitignore` is not a substitute for checking uploads manually.
+**The website does not send text messages or emails.** Scanning a QR batch never automatically marks a record as contacted.
 
-## Download a standalone version via GitHub Releases
+## Try the fictional-data demo
 
-Open [Releases](https://github.com/PrintOrb/recruiting-intake-demo/releases/latest) and download the versioned `Recruiting_Intake_System_vX.Y.Z.zip` **asset**, not GitHub's auto-generated source ZIP. It contains only the non-demo kiosk, dashboard, assets, a blank header-only `Recruiting_Leads.csv`, and the optional empty Excel reporting workbook.
+The [GitHub Pages demo](https://printorb.github.io/recruiting-intake-demo/) lives under `docs/`. It uses fictional test records stored only in the visitor's browser, with no backend or shared database. It accepts designated fictional phone numbers and example email addresses. **Never enter real student data.**
 
-The first release is built automatically by `.github/workflows/publish-release.yml`. For later versions, run **Actions → Publish standalone recruiting system → Run workflow** with a new version like `v1.0.1`. Never include real leads in a release.
+- [Student kiosk demo](https://printorb.github.io/recruiting-intake-demo/Recruiting_Intake_Kiosk.html)
+- [Recruiter dashboard demo](https://printorb.github.io/recruiting-intake-demo/Recruiting_Staff_Manager.html)
 
+## Download the standalone edition
 
-### Email follow-up (v1.0.0)
+The [latest GitHub Release](https://github.com/PrintOrb/recruiting-intake-demo/releases/latest) contains a separate CSV-based application, **with a blank, header-only lead file and no demonstration records**.
 
-The staff dashboard includes an email-outreach panel. Copy unique opted-in
-addresses for BCC, or download a mail-merge CSV containing FirstName, LastName,
-Email and GraduationYear, without dates of birth. Use only an approved recruiting
-mail account/service; nothing is sent automatically. Following a successful
-send, select those leads and click **Mark emailed** then **Save changes to CSV**.
-Email Status is distinct from the existing SMS Contact Status. The kiosk and
-manager can open older eleven-column CSVs and upgrade them on the next save.
+1. Download the versioned `Recruiting_Intake_System_vX.Y.Z.zip` **release asset** (not GitHub's automatically generated source ZIP).
+2. Extract the complete ZIP into a folder permitted by organizational policy.
+3. Open `Recruiting_Intake_Kiosk.html` in a compatible desktop Edge or Chrome browser, then select the included blank `Recruiting_Leads.csv`.
+4. Open `Recruiting_Staff_Manager.html` and select that **same** CSV.
+5. Test with fictional contacts first. Read [standalone setup instructions](operational/START_HERE.txt) before any deployment.
 
-### Timed student background slideshow
+The standalone application uses the browser's File System Access API, which may not be allowed on managed devices. **It has no login, backend or at-rest encryption.** Real data use requires authorization.
 
-The student page automatically cycles through three Air Force-inspired photo treatments every 20 seconds, with a 1.8-second crossfade. Configure the slideshow in each build's `assets/js/Recruiting_Config.js`; the form and CSV workflows are unchanged.
+## Repository structure
+
+```text
+docs/                          Public fictional-data demo (GitHub Pages)
+operational/                   Standalone source and staff instructions
+operational/docs/              Technical guides and deployment checklist
+.github/workflows/             Release automation
+RELEASE_NOTES.md               Latest standalone release notes
+```
+
+Pages publishes `docs/` only. The `operational/` source is also visible in this public repository, even though it is not served as the website.
+
+## Privacy, attribution, and limits
+
+- Never commit actual lead CSVs, contact details, DOBs, exports, passwords or secrets. `.gitignore` is not a substitute for careful review.
+- The public demo is for fictional data only; do not text demo numbers.
+- Consent wording, collection of minors' data, retention and storage policies, use of personal devices, and QR/iPhone transfer require separate approval.
+- The iPhone Shortcut is shared through iCloud and should be reviewed before installation. A publicly shared Shortcut is not an approved government workflow.
+- The military photos are [credited here](docs/PHOTO_CREDITS.md). Their use does not imply Air Force/DoD endorsement.
+
+## Maintenance and releases
+
+[Customization guide](operational/docs/CUSTOMIZATION_GUIDE.md) · [Testing checklist](operational/docs/TESTING_CHECKLIST.md) · [Deployment and approval checklist](operational/docs/DEPLOYMENT_CHECKLIST.md)
+
+The [GitHub Actions release workflow](.github/workflows/publish-release.yml) validates and packages **only** the standalone `operational/` application and rejects CSV records beyond the header row. Each release includes a versioned ZIP and SHA-256 checksum. Publishing a release does **not** constitute authorization to collect real student information.

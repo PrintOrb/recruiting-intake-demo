@@ -1,4 +1,4 @@
-# Deployment checklist
+# Pre-deployment approval and testing checklist
 
 ### Public demonstration
 - [ ] GitHub Pages source configured to `main` / `/docs` only
@@ -19,3 +19,9 @@
 - [ ] Approved email account, BCC/mail-merge process and email-contact status verified
 - [ ] Backup/retention/deletion procedures established
 - [ ] No unauthorized USBs, restricted downloads or security bypasses
+
+### Publication and branding checks
+- [ ] Public demo and standalone screens clearly identify the prototype as independent, not an official Air Force or DoD application
+- [ ] Shortcut installer and release notes have been reviewed for implied endorsement
+- [ ] Photo credits are retained, with no suggestion of official endorsement
+- [ ] Standalone ZIP contains only blank lead files and no demo records

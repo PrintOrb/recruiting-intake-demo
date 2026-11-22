@@ -8,4 +8,4 @@ The rotating kiosk backgrounds are three genuine photographs published by the De
 | `AF_C17_Golden_Hour.jpg` | C-17 Globemaster III in flight near Stewart ANGB, 2026. U.S. Air National Guard photo by Airman Kamila Dul. | https://www.dvidshub.net/image/9904000/c-17-golden-hour |
 | `AF_Cyber_Operations.jpg` | 367th Cyberspace Operations Squadron, 2025. U.S. Air Force photo by Jantzen Floate. | https://www.dvidshub.net/image/9179112/air-forces-premier-cyber-operators |
 
-The download script `.github/scripts/fetch_air_force_photos.py` retrieves these images at build time so the final student kiosk does not depend on third-party internet image loading.
+The actual image files are committed in both versions under `assets/images/`, and the standalone release bundles them for offline rotation. Photo attribution does not imply Air Force or DoD endorsement.

@@ -1,55 +1,39 @@
-RECRUITING INTAKE SYSTEM — START HERE
-====================================
+RECRUITING INTAKE SYSTEM — STANDALONE
+=====================================
 
-1. EXTRACT all files and folders from this ZIP. Do not launch HTML directly
-   from inside the ZIP. The two pages need their assets/ folders.
+INDEPENDENT PROTOTYPE — NOT AN OFFICIAL U.S. AIR FORCE APPLICATION.
+NOT APPROVED BY DEFAULT FOR REAL STUDENT DATA COLLECTION.
 
-2. Open Recruiting_Intake_Kiosk.html in desktop Microsoft Edge or Chrome.
-   Click Select lead file, then choose the included Recruiting_Leads.csv.
-   Use fictional data for the first test.
+1. Extract the complete GitHub Release ZIP. Do not launch HTML files
+   from inside a ZIP archive.
 
-3. After intake is finished, CLOSE the kiosk. Open
-   Recruiting_Staff_Manager.html, select the SAME CSV, then review/copy/QR
-   the FirstName|PhoneNumber list for your existing iPhone Shortcut.
+2. Open Recruiting_Intake_Kiosk.html in desktop Edge/Chrome.
+   Select the included blank Recruiting_Leads.csv.
+   Test with fictional student information first.
 
-4. TO EDIT WORDING, COLORS, OR QR BATCH SIZE, open:
-       assets/js/Recruiting_Config.js
-   in VS Code or Notepad++. Save, then refresh the pages.
+3. Open Recruiting_Staff_Manager.html and select that SAME CSV.
+   Review records, age/birthdays, SMS QR batches and email outreach.
 
-5. FOR FULL DOCUMENTATION, READ:
-       README.md
-       docs/CUSTOMIZATION_GUIDE.md
-       docs/TECHNICAL_REFERENCE.md
-       docs/TESTING_CHECKLIST.md
+4. Use Get iPhone Shortcut to open the companion installer. The Apple
+   iCloud link requires internet access; inspect the Shortcut actions.
+   A QR scan does not automatically update a contact status.
+   Confirm only messages actually sent.
 
-WARNING: The local CSV is unencrypted and these pages have no login. This is
-not an officially approved Air Force information system. Use real student
-information only after the recruiting organization authorizes the devices,
-privacy notice, consent process and data transfer. Do not send lead data
-through personal email.
+5. For email outreach, use an authorized email account and mark
+   Emailed only after a confirmed send.
 
+6. To customize the text, photos, theme or Shortcut URL:
+      assets/js/Recruiting_Config.js
 
-Background image note:
-- The student page background image is stored at assets/images/Kiosk_Background.jpg
-- Replace that file if you want a different image later.
+7. For detailed guidance:
+      README.md
+      docs/CUSTOMIZATION_GUIDE.md
+      docs/TECHNICAL_REFERENCE.md
+      docs/TESTING_CHECKLIST.md
+      docs/DEPLOYMENT_CHECKLIST.md
 
-V5 LOOK AND FEEL: Both screens use a coordinated Air Force-inspired visual theme.
-Brand words/colors: assets/js/Recruiting_Config.js
-Design styling: assets/css/Recruiting_Kiosk.css and Recruiting_Manager.css
-
-
-VERSION 6 CONTACT TRACKING:
-- After your iPhone sends a QR batch, return to the PC.
-- In the QR dialog, uncheck any messages that did not send.
-- Click Confirm sent / mark contacted to save their statuses immediately.
-- To remove a lead, select its checkbox in the staff table and click Delete selected.
-- Scanning alone does NOT synchronize the two devices; staff must confirm successful sends.
-
-
-EMAIL OUTREACH:
-- Open the staff dashboard and copy unique BCC addresses, or download a
-  mail-merge CSV for personalized follow-up from an approved email account.
-- Email status is tracked separately from SMS; mark Emailed only after the
-  approved mail system confirms sending, then Save changes to CSV.
-- Existing CSV files from earlier versions automatically gain the new
-  Email Status column on their first save. Back up the original file first.
+SECURITY:
+Local records are unencrypted and these pages have no login or server.
+Authorization is needed for devices, storage, privacy/consent,
+collection from minors and any phone/QR transfer.
+Never upload actual leads to GitHub or personal accounts.

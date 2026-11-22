@@ -100,30 +100,26 @@ A field like "school name" is **not** merely a visual edit. You must coordinate 
 **Need to change the contact message?** That message lives in the iPhone Shortcut; the system only supplies `FirstName|PhoneNumber` lines. Do not embed the recruiter's message in the QR unless you intentionally redesign the workflow.
 
 
-## 7. The Air Force-inspired theme (v5)
+## 7. Air Force-inspired design (independent project)
 
 - The student kiosk and staff manager are styled as one interface system: dark navy, white and cool blue highlights, angular borders, condensed uppercase headings.
 - The header mark reading **AF** is a custom typographic element, not an official Air Force symbol. Do not replace it with official insignia without appropriate review of applicable branding guidance.
 - Brand wording, accent colors and headings are in `assets/js/Recruiting_Config.js`.
-- For different event photo backgrounds replace `assets/images/Kiosk_Background.jpg` with a new image (same filename), or change `--kiosk-bg-image` in `assets/css/Recruiting_Kiosk.css`.
+- For event-specific photos, place credited images in `assets/images/` and update the `kiosk.backgroundShuffle.images` list in `assets/js/Recruiting_Config.js`. See `PHOTO_CREDITS.md`.
 - The browser uses locally installed system fonts, so it still works offline. If a condensed font isn't installed, the browser uses a fallback.
 - Test readability after every background swap and run `docs/TESTING_CHECKLIST.md` before using the form.
 
 ### Timed student background slideshow
 
-The student kiosk cycles through three visual treatments of `assets/images/Kiosk_Background.jpg` every 20 seconds with a 1.8-second crossfade. Change `kiosk.backgroundShuffle.intervalSeconds`, `fadeSeconds`, `images`, or `presets` in `assets/js/Recruiting_Config.js`. You can replace the repeated paths with different locally stored approved images. The animation is decorative and never affects the intake form.
+The kiosk rotates three **different**, credited public-domain military photographs every 20 seconds with a 1.8-second fade. Update `kiosk.backgroundShuffle.intervalSeconds`, `fadeSeconds`, or `images` in `assets/js/Recruiting_Config.js`. Files are included locally; the animation never affects registration data.
 
 ## iPhone Shortcut installation link
 
 The recruiter dashboard includes **Get iPhone Shortcut**, which opens `iphone-shortcut.html`. 
 This page supports a single-tap installation link on an iPhone and an offline-generated QR code to scan from a computer.
 
-**To activate it:**
-1. On the iPhone holding the finished **Recruiting Text Assistant**, long-press the shortcut, tap **Share**, then **Copy iCloud Link**. If necessary, open the shortcut editor and use its Share menu.
-2. Review the shortcut before sharing: remove any personal phone numbers, account details, contact records, or test-only text.
-3. In each version's `assets/js/Recruiting_Config.js`, replace `shortcuts.iphoneShareUrl: ""` with that exact Apple `https://www.icloud.com/shortcuts/...` link. Keep the two configurations in sync.
-4. Publish the changes to GitHub Pages and test installation on a different iPhone.
+**Already configured:** both versions contain the shared Recruiting Text Assistant iCloud URL in `assets/js/Recruiting_Config.js` under `shortcuts.iphoneShareUrl`.
 
-Until a valid share link is configured, the installer page explains why installation is unavailable; it never shows a fake or broken download link.
+**To change the installed Shortcut later:** review the actions and create a new iCloud share link, update that setting in both builds, then test the installer button and QR with a second iPhone. Opening Apple's installation page requires internet access; the QR image is generated in-browser.
 
 **Important:** An iCloud sharing link allows anyone with the link to inspect, copy, and modify a copy of the shortcut. Do not publish sensitive details. Sharing does not establish Air Force approval to use an unapproved app or personal device for real leads.

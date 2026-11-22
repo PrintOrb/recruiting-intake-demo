@@ -1,23 +1,27 @@
-# Operational build (non-demo) — approval required before using real data
+# Recruiting Intake System — Standalone Edition
 
-This is the original v7 **working CSV-based** kiosk and staff dashboard with no demo storage adapter. All student records are written to a staff-selected local CSV file via the browser File System Access API, not to GitHub.
+**Independent prototype. Not an official U.S. Air Force application or an approved system for collecting real student records.**
 
-## Setup on a permitted machine
+This standalone edition reads and writes a staff-selected local CSV file. Unlike the public GitHub Pages demo, it does not contain preloaded fictional records.
 
-1. Obtain written organizational/IT approval for this application, storage location, data collection and SMS/QR transfer process. The app is not currently an authorized government information system.
-2. Place this entire `operational` folder in an authorized location, and make an authorized copy of `Recruiting_Leads_EMPTY.csv` named **`Recruiting_Leads.csv`** in an approved storage folder. Do not commit, email to personal accounts, or publish that file.
-3. In recent desktop Edge/Chrome, open `Recruiting_Intake_Kiosk.html`. Select the CSV file and test with fictitious entries first.
-4. Open `Recruiting_Staff_Manager.html` and select the same CSV. CSV is not automatically synced to the optional Excel reporting workbook.
-5. Follow the v7 staff workflow for QR batches: scan `FirstName|PhoneNumber` lines with the iPhone Shortcut, review actual sends, then confirm the successful recipients on the dashboard to mark them Contacted. Scanning alone does not record deliveries.
+## Setup
 
-The application has **no login, no encryption and no server backend**; File System Access might be restricted by government browser policy. If approved internal hosting is later available, these static sources may be adapted for it, subject to security and privacy review. Do not use public GitHub Pages as the operational database or assume that code availability equals approval. Student privacy notices and consent requirements still apply.
+1. Obtain permission for the software, device/browser, records storage, consent/privacy notice and any iPhone/QR data transfers **before collecting real records**.
+2. When downloading the release, extract the entire ZIP and use the included blank `Recruiting_Leads.csv`. When working directly from source, copy `Recruiting_Leads_EMPTY.csv` to that filename **outside GitHub**.
+3. In supported desktop Edge/Chrome, open `Recruiting_Intake_Kiosk.html`, select that CSV, and test with fictional details.
+4. Open `Recruiting_Staff_Manager.html` and select the **same** CSV.
+5. Use the dashboard to view records, ages, birthdays, and SMS/email outreach. Confirm actual messages sent; scanning a QR alone does not update the file.
+6. Use **Get iPhone Shortcut** for the companion installation page (iCloud requires internet); the kiosk photographs rotate offline.
 
-The empty CSV template is deliberately named `Recruiting_Leads_EMPTY.csv` so a future push cannot overwrite any saved records. Keep all live CSV records outside this repository.
+## Key files
 
+- `assets/js/Recruiting_Config.js` — branding, editable wording, photo rotation and Shortcut URL
+- `assets/images/` and `PHOTO_CREDITS.md` — credited military photography
+- `docs/CUSTOMIZATION_GUIDE.md` — maintenance instructions
+- `docs/TESTING_CHECKLIST.md` — functional tests
+- `docs/DEPLOYMENT_CHECKLIST.md` — pre-deployment authorization and privacy review
+- `Recruiting_Excel_Tracker.xlsx` — optional **blank** workbook; not automatically synchronized with the CSV
 
-EMAIL FOLLOW-UP
-The staff manager can copy a BCC-only list of unique, opted-in email addresses
-or download a FirstName,LastName,Email,GraduationYear mail-merge CSV. Email
-contact status is tracked separately from text outreach. Confirm actual sends
-before marking Emailed, then save changes. No emails are sent by the tool.
-Existing 11-column lead CSV files migrate to the 12-column schema on save.
+The lead CSV has separate SMS and email statuses. The manager can read earlier eleven-column CSVs and extend them on save. Ages and upcoming birthdays are calculated from stored DOB and are not written as duplicate fields.
+
+**Limitations:** no login, encryption, or server backend. Managed-device policy may prevent local file access. Approval for student data and the mobile Shortcut workflow must be obtained independently. Never put real student records on GitHub or the public demonstration.
