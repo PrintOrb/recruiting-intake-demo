@@ -12,9 +12,6 @@
 
 </div>
 
-> [!IMPORTANT]
-> **Independent, unofficial project.** This repository is **not affiliated with, endorsed by, or an official application of the U.S. Air Force or Department of Defense.** The public demo is for **fictional data only**. Do not use the standalone app for real student information without appropriate organizational, IT, privacy, and device authorization.
-
 ## At a glance
 
 Recruiting Intake System is a browser-based prototype that replaces handwritten or spreadsheet-based interest signups with a student-facing registration screen and a separate staff dashboard.
