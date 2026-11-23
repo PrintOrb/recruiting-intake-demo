@@ -9,9 +9,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'New release tag (example: v1.1.1)'
+        description: 'New release tag (example: v1.1.2)'
         required: true
-        default: 'v1.1.1'
+        default: 'v1.1.2'
         type: string
 
 permissions:
@@ -29,12 +29,12 @@ jobs:
           for script in operational/assets/js/*.js; do node --check "$script"; done
       - name: Assemble clean non-demo release
         env:
-          RELEASE_TAG: ${{ inputs.version || 'v1.1.1' }}
+          RELEASE_TAG: ${{ inputs.version || 'v1.1.2' }}
         run: python3 .github/scripts/build_release.py --version "$RELEASE_TAG"
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ inputs.version || 'v1.1.1' }}
+          RELEASE_TAG: ${{ inputs.version || 'v1.1.2' }}
         shell: bash
         run: |
           set -euo pipefail

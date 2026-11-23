@@ -1,24 +1,25 @@
-# Recruiting Intake System v1.1.1
+# Recruiting Intake System v1.1.2
 
-**Presentation and disclosure update** — standalone edition only, with a blank lead file and no demo records.
+**Standalone interface cleanup and optional-contact-consent update.**
 
-## What's new in v1.1.1
-- **Independent-project notice** prominently displayed on the standalone student kiosk, staff dashboard and iPhone Shortcut installer.
-- Browser tab titles and header branding revised to avoid suggesting that this independently developed application is an official Air Force system.
-- Cleaned-up project documentation, photo attribution, and startup guidance; deployment/approval checklist moved into `docs/`.
-- **No changes** to intake data fields, CSV format, age/birthday calculations, SMS/QR payload, email exports or photo rotation.
+## What's changed
 
-## Included features
-- Student kiosk with three distinct credited public-domain U.S. military photographs rotating every 20 seconds.
-- Staff dashboard for SMS and email contact tracking, duplicate review, birthdays, ages, and lead management.
-- Offline QR batch generator and manual confirmation of successful SMS sends.
-- Companion iPhone Shortcut installation page with the existing shared iCloud link.
-- A blank `Recruiting_Leads.csv`, optional blank Excel workbook, locally bundled image assets, and guides.
+- Removed the on-screen independent-project notice from the standalone kiosk and staff manager and cleaned up both browser titles.
+- Removed the independent/unofficial-project messaging and unused styling from the iPhone Shortcut installation page.
+- Contact permission is **optional** on the student form: checked means `Text Consent = Yes`; unchecked means `Text Consent = No`, and the record is excluded from SMS QR batches and email exports.
+- Updated the instructions to explain that declining contact still allows a submission.
+- The public fictional-data demo continues to require a separate confirmation that all details are invented.
 
-## Install
-Download **`Recruiting_Intake_System_v1.1.1.zip`** (Assets), extract everything, and open `Recruiting_Intake_Kiosk.html` in supported desktop Edge/Chrome. Select the included **blank** lead CSV. Open `Recruiting_Staff_Manager.html` and select that same CSV. Test with fictional leads before considering operational use.
+## Included in this ZIP
 
-**The standalone release does not contain the GitHub Pages demo or any preloaded leads.**
+The standalone student kiosk, staff dashboard, iPhone Shortcut installation page, credited local background images, blank header-only lead CSV, optional blank Excel reporting workbook, and maintenance documentation. **No sample or actual lead records are included.**
 
-## Important notice
-**Independent prototype; not an official U.S. Air Force or Department of Defense application or an approved government information system.** Before collecting any real student information—including information from minors—obtain the applicable organizational, IT, privacy, data-storage, consent, retention, and phone/QR transfer approvals. The CSV is local and unencrypted; the software has no authentication or server access controls. Public demo pages must not receive real records.
+The CSV schema, existing record compatibility, contact tracking, photo rotation, QR formats and mail-merge output remain unchanged.
+
+## Setup
+
+Download **`Recruiting_Intake_System_v1.1.2.zip`** from the Assets section, extract it completely, and open the kiosk in a supported desktop Edge/Chrome browser. Choose the included blank `Recruiting_Leads.csv`. Open the recruiter dashboard with that same file.
+
+## Important use limitations
+
+This is an independently developed prototype, **not an official or approved U.S. Air Force or DoD information system**. Public GitHub repository documentation retains that distinction. Using the software with real student records requires organizational, IT, privacy, consent, data storage, retention, and mobile-device/QR transfer approval. No login or at-rest encryption is provided; the public demo is for fictional records only.
