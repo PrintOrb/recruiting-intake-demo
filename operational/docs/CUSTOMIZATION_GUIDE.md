@@ -80,7 +80,7 @@ Both CSS files are expanded and organized by selector, so edits are readable. Th
 
 ## 5. How to add a brand-new form field
 
-A field like "school name" is **not** merely a visual edit. You must coordinate four parts:
+A *new* field beyond the built-in School column is **not** merely a visual edit. You must coordinate four parts:
 
 1. Add the label/input to `Recruiting_Intake_Kiosk.html` (with a unique ID).
 2. Read/validate its value and append it in `assets/js/Recruiting_Kiosk.js`.
@@ -123,3 +123,9 @@ This page supports a single-tap installation link on an iPhone and an offline-ge
 **To change the installed Shortcut later:** review the actions and create a new iCloud share link, update that setting in both builds, then test the installer button and QR with a second iPhone. Opening Apple's installation page requires internet access; the QR image is generated in-browser.
 
 **Important:** An iCloud sharing link allows anyone with the link to inspect, copy, and modify a copy of the shortcut. Do not publish sensitive details. Sharing does not establish Air Force approval to use an unapproved app or personal device for real leads.
+
+## School visit setup
+
+Use the staff-only **School / event name** input on the kiosk's file-connection screen to set the active visit. The text applies to each new record while the kiosk tab remains open; starting a new visit requires reopening the kiosk setup. Students never enter or edit School.
+
+The staff dashboard has a **School** column and can search school names. **Assign to selected** replaces existing school tags on selected leads, while **Fill unassigned records** only fills blank values in the current CSV. Both change local data first, then require **Save changes to CSV**. Existing 11-/12-column CSVs open normally, migrate to the 13-column format on save, and retain all earlier data. Do not rename or move the `School` header within the CSV.

@@ -16,7 +16,7 @@ Work with **fictional contacts or numbers you control**. Use a fresh copy of the
 - [ ] Open the CSV in Excel (only **after** exiting kiosk intake) and check values in the correct columns.
 - [ ] Submit an exact duplicate fictional student; confirm the record is not added twice.
 - [ ] Try an invalid phone, future DOB, malformed email, and out-of-range graduation year. They should not be saved.
-- [ ] Confirm consent must be checked to submit.
+- [ ] Verify outreach consent is optional; unchecked submissions still save with `No` and never enter SMS/email exports.
 
 ## Staff and export
 
@@ -59,10 +59,21 @@ Work with **fictional contacts or numbers you control**. Use a fresh copy of the
 - [ ] Download mail-merge CSV includes FirstName, LastName, Email, GraduationYear only.
 - [ ] Mark Emailed changes email status only after confirmation; save CSV.
 - [ ] SMS status and QR eligibility remain unchanged when email is marked Emailed.
-- [ ] Legacy 11-column CSV opens and expands with Email Status on next save.
+- [ ] Legacy 11- and 12-column CSVs load and migrate to 13 columns with an empty School; all other fields remain unchanged.
 
 ## Optional outreach consent
 
 - [ ] With contact consent unchecked, submit a fictional lead. It must be saved with `Text Consent = No` and excluded from **both** SMS and email exports and QR batches.
 - [ ] With contact consent checked, submit a different fictional lead. It must be saved with `Text Consent = Yes` and, if otherwise eligible, appear in permitted outreach lists.
 - [ ] Verify the consent box visibly states that it is optional. Review the consent wording with the appropriate privacy authority before any real use.
+
+## School visit tracking
+
+- [ ] On kiosk startup, leave School blank and click Select lead file; staff must get a clear validation error.
+- [ ] Enter a fictional school, connect a blank CSV, and create two fictional submissions. Both must have the same School; students should not see an editable School field.
+- [ ] Close/reopen the kiosk and set another school. New entries should have the new School, while existing entries keep the old School.
+- [ ] Open manager and confirm School column and school search work.
+- [ ] Search by school, select visible rows, and assign a third school. Other school values must remain unchanged.
+- [ ] Use Fill unassigned records for older, school-less rows; existing school values must not change.
+- [ ] Confirm school assignments require an explicit Save changes to CSV and survive reload.
+- [ ] Validate SMS consent, QR payload, and email exports are unchanged by school updates.

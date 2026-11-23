@@ -28,3 +28,10 @@
 - [ ] With the separate **fictional-data confirmation** checked, submit a fictional lead without outreach consent. The record should save as `No` and never appear in eligible SMS or email exports.
 - [ ] Submit a distinct fictional lead with outreach consent checked. It should save as `Yes` and be eligible only when all other outreach checks pass.
 - [ ] Leave the required **fictional-data confirmation** unchecked and verify that the public demo will not submit.
+
+## School tagging (fictional demo)
+
+- [ ] The demo kiosk requires a fictional school name in staff setup before student submissions.
+- [ ] New fictional students have that School value; older 11-/12-column demo records still load.
+- [ ] The manager School column and search work, and batch school assignments save within the same browser's fictional demo storage.
+- [ ] Bulk school changes do not alter consent or SMS/email status. Reset demo records to restore the fictitious starter school names.

@@ -27,18 +27,20 @@ Plain static HTML/CSS/JavaScript (no server), writing to a **staff-selected loca
 | 7 | Graduation Year | Four-digit year |
 | 8 | Text Consent | `Yes` when intake checkbox is checked |
 | 9 | Contact Status | `New` or `Contacted` |
-| 10 | Source | Configured `data.sourceLabel` |
+| 10 | Source | Configured `data.sourceLabel` (origin category; **not** the school) |
+| 11 | Email Status | `New` or `Emailed`, tracked independently of SMS |
+| 12 | School | Staff-selected school or event name; blank for imported older leads |
 
 The `Recruiting_Leads.csv` file is deliberately header-only. Do not put real student details into a test version.
 
 ## Kiosk save sequence
 
-1. Staff selects an existing CSV file.
-2. Kiosk verifies exact headers.
-3. Student enters the five requested types of information (name, phone, email, DOB, grad year) and confirms contact consent.
+1. Staff types the school/event name once, then selects the existing lead CSV file.
+2. Kiosk accepts the current 13-column headers or legacy 11-/12-column headers and upgrades the data on the next save.
+3. Student enters name, phone, email, DOB, and graduation year; contact consent is optional. The school is not editable by the student.
 4. Browser validates inputs: name characters, ten-digit US phone, email shape, DOB not in future, and graduation-year bounds.
 5. Kiosk checks existing records for **the same first name, last name, and phone** (case-insensitive names). Exact duplicates are not appended; the success screen still appears.
-6. Otherwise the kiosk appends a record with `Yes`, `New`, and configured source label; saves the CSV; clears the form; displays success and returns to a blank form.
+6. Otherwise the kiosk appends a record with consent `Yes` or `No`, SMS/email statuses `New`, configured Source, and the staff-selected School; saves the CSV and resets the form.
 
 The form intentionally does not display earlier records. Its date of birth is stored in the CSV, but the QR and SMS export omit it.
 
@@ -74,7 +76,15 @@ The **Delete selected** button removes selected rows permanently after a confirm
 
 ## Email outreach
 Email addresses are stored in the lead CSV and displayed only in the staff
-manager. The final CSV column `Email Status` is `New` or `Emailed` independently
-of `Contact Status` (SMS). Older eleven-column CSVs are supported and migrated
-on their next save. CSV export includes first/last name, email and graduation
+manager. Column 11 `Email Status` is `New` or `Emailed` independently
+of `Contact Status` (SMS). The last column, 12, is `School`. Prior 11- or
+12-column files are supported and upgraded on their next save. CSV export includes first/last name, email and graduation
 year; BCC copy is a semicolon-separated list. This site does not send email.
+
+## School visit tags and bulk corrections
+
+At each event the staff member provides a School name before connecting the kiosk to its CSV file. That value applies only to new submissions during the current kiosk session. The `Source` value is retained for the kind of outreach; it is not overwritten by School.
+
+The manager shows School next to Graduation Year. Search matches school names, and selecting visible search matches enables a batch assignment. Staff can type a new school name and choose **Assign to selected** (replaces tags on selected rows only) or **Fill unassigned records** (sets blank School tags throughout the file). Both require confirmation and then **Save changes to CSV**. This changes only the school field, not SMS, email or consent status. Older 11-/12-column rows have blank School until assigned. Back up a CSV before any large correction.
+
+The optional Excel workbook is a separate, non-synchronized reporting template. Its layout has not been extended to include School; use the full 13-column CSV for school-based analysis.
