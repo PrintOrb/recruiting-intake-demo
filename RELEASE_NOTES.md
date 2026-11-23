@@ -1,25 +1,23 @@
-# Recruiting Intake System v1.1.2
+# Recruiting Intake System v1.2.0
 
-**Standalone interface cleanup and optional-contact-consent update.**
+**New: School visit tagging and bulk assignment.**
 
-## What's changed
+## What changed
 
-- Removed the on-screen independent-project notice from the standalone kiosk and staff manager and cleaned up both browser titles.
-- Removed the independent/unofficial-project messaging and unused styling from the iPhone Shortcut installation page.
-- Contact permission is **optional** on the student form: checked means `Text Consent = Yes`; unchecked means `Text Consent = No`, and the record is excluded from SMS QR batches and email exports.
-- Updated the instructions to explain that declining contact still allows a submission.
-- The public fictional-data demo continues to require a separate confirmation that all details are invented.
+- **Set school once per visit.** Staff enter the school or recruiting event name before connecting the kiosk to its lead CSV. Every subsequent student submission is automatically tagged; students do not enter their school.
+- **School column and search.** Recruiters can see each lead's school and search/filter the table by school.
+- **Bulk assignment.** Enter a school in the staff dashboard to update selected rows or fill all unassigned records without overwriting existing school names. Confirmation is required; click Save changes to CSV to persist assignments.
+- **Compatible with older records.** Earlier 11- and 12-column CSVs are accepted. They migrate to 13 columns when saved, with an empty School field on historical records until assigned.
+- Demo starter records use a fictional school name.
 
-## Included in this ZIP
+**Unchanged:** contact-consent rules, SMS QR format (`FirstName|PhoneNumber`), email exports and status tracking, birthdays, and the timed photo slideshow.
 
-The standalone student kiosk, staff dashboard, iPhone Shortcut installation page, credited local background images, blank header-only lead CSV, optional blank Excel reporting workbook, and maintenance documentation. **No sample or actual lead records are included.**
+## Standalone download
 
-The CSV schema, existing record compatibility, contact tracking, photo rotation, QR formats and mail-merge output remain unchanged.
+Download **`Recruiting_Intake_System_v1.2.0.zip`** under Assets. Extract it completely and open the kiosk in supported desktop Edge/Chrome. Enter the school name and select the included blank `Recruiting_Leads.csv`; students then use the form as normal. Later, open the manager with the same CSV to review, search, or bulk-assign school tags.
 
-## Setup
+The standalone ZIP contains a header-only lead CSV, an optional blank Excel reporting workbook, locally bundled credited military photos, the iPhone Shortcut installer, and documentation. It includes **no demo records or real student information**.
 
-Download **`Recruiting_Intake_System_v1.1.2.zip`** from the Assets section, extract it completely, and open the kiosk in a supported desktop Edge/Chrome browser. Choose the included blank `Recruiting_Leads.csv`. Open the recruiter dashboard with that same file.
+## Use limitations
 
-## Important use limitations
-
-This is an independently developed prototype, **not an official or approved U.S. Air Force or DoD information system**. Public GitHub repository documentation retains that distinction. Using the software with real student records requires organizational, IT, privacy, consent, data storage, retention, and mobile-device/QR transfer approval. No login or at-rest encryption is provided; the public demo is for fictional records only.
+This is an independently developed prototype, not an official or approved U.S. Air Force or DoD information system. Obtain applicable IT, privacy, consent, storage, and mobile-device/QR transfer authorization before collecting real student information, especially minors' data. The local CSV is unencrypted.

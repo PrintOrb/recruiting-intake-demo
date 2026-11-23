@@ -21,7 +21,7 @@ CSV_OUTPUT = "Recruiting_Leads.csv"
 EXPECTED_HEADERS = [
     "Submission ID", "Submitted At", "First Name", "Last Name", "Phone",
     "Email", "Date of Birth", "Graduation Year", "Text Consent",
-    "Contact Status", "Source", "Email Status",
+    "Contact Status", "Source", "Email Status", "School",
 ]
 
 README = """# Recruiting Intake System — Standalone
@@ -37,6 +37,7 @@ This download includes the local-file student kiosk, recruiter dashboard and iPh
 4. Use **Show QR for iPhone** for consented SMS batches. **Get iPhone Shortcut** opens `iphone-shortcut.html` with the shared iCloud link (internet required). Inspect the Shortcut before installation; confirm only contacts actually sent. Scanning does not automatically update CSV.
 5. Use authorized email accounts for email outreach, and record only messages actually sent.
 6. Ages and birthdays are calculated from DOB without extra CSV fields.
+7. During kiosk staff setup, enter today's school/event name once; every new lead is tagged automatically. The dashboard can bulk-assign schools to selected or unassigned records, followed by Save changes to CSV.
 
 ## Documentation
 - `START_HERE.txt`, `docs/CUSTOMIZATION_GUIDE.md`, `docs/TECHNICAL_REFERENCE.md`

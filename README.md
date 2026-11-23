@@ -18,8 +18,9 @@ Recruiting Intake System is a browser-based prototype that replaces handwritten 
 
 | Student kiosk | Recruiter dashboard |
 |:--|:--|
-| Contact information and optional outreach consent | Lead search, duplicate-number review, status management |
+| Contact information and optional outreach consent | Lead search, duplicate-number review, bulk school assignment and status management |
 | Date of birth and graduation year | Calculated age and upcoming birthdays |
+| School chosen by staff once per kiosk session | School column, school search, and batch reassignment |
 | Rotating, credited military photography | QR batches for a companion iPhone Shortcut |
 | Browser-based workflow | Email BCC list and limited mail-merge CSV |
 
@@ -41,7 +42,7 @@ Recruiting Intake System is a browser-based prototype that replaces handwritten 
 
 1. Download the **versioned ZIP under Releases → Assets**, not the auto-generated source archive.
 2. Extract the complete archive to a permitted folder.
-3. Open `Recruiting_Intake_Kiosk.html` in compatible desktop Microsoft Edge or Chrome and select the included **blank** `Recruiting_Leads.csv`.
+3. Open `Recruiting_Intake_Kiosk.html` in compatible desktop Microsoft Edge or Chrome, enter the school/event name in staff setup, and select the included **blank** `Recruiting_Leads.csv`.
 4. Open `Recruiting_Staff_Manager.html` and select that **same** CSV file.
 5. Test with fictional records. Follow [START_HERE](operational/START_HERE.txt) and the [deployment checklist](operational/docs/DEPLOYMENT_CHECKLIST.md) before any operational use.
 

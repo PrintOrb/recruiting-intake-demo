@@ -8,11 +8,15 @@ NOT APPROVED BY DEFAULT FOR REAL STUDENT DATA COLLECTION.
    from inside a ZIP archive.
 
 2. Open Recruiting_Intake_Kiosk.html in desktop Edge/Chrome.
-   Select the included blank Recruiting_Leads.csv.
+   Enter today's school or event name in staff setup, then select
+   the included blank Recruiting_Leads.csv. Every new submission
+   automatically receives the selected school name.
    Test with fictional student information first.
 
 3. Open Recruiting_Staff_Manager.html and select that SAME CSV.
-   Review records, age/birthdays, SMS QR batches and email outreach.
+   Review records, school names, ages/birthdays, SMS QR batches and email outreach.
+   Use Assign school or event to bulk-tag selected records or fill
+   only unassigned schools, then save to CSV.
 
 4. Use Get iPhone Shortcut to open the companion installer. The Apple
    iCloud link requires internet access; inspect the Shortcut actions.
