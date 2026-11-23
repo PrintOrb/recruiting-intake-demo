@@ -21,7 +21,7 @@
 - [ ] No unauthorized USBs, restricted downloads or security bypasses
 
 ### Publication and branding checks
-- [ ] Public demo and standalone screens clearly identify the prototype as independent, not an official Air Force or DoD application
+- [ ] Public demo banners and standalone documentation, browser titles, and Shortcut installer identify the prototype as independent; operational kiosk/dashboard have no top banner
 - [ ] Shortcut installer and release notes have been reviewed for implied endorsement
 - [ ] Photo credits are retained, with no suggestion of official endorsement
 - [ ] Standalone ZIP contains only blank lead files and no demo records

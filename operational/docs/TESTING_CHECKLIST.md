@@ -31,7 +31,7 @@ Work with **fictional contacts or numbers you control**. Use a fresh copy of the
 
 ## Before any authorized event
 
-- [ ] All standalone screens visibly identify this software as an independent prototype, not an official U.S. Air Force product.
+- [ ] Browser titles, standalone setup documentation, repository README, and Shortcut installer clearly identify the software as an independent prototype; the operational screens do not display an on-screen banner.
 - [ ] Test three distinct bundled military background photos offline, including credits.
 - [ ] Verify the iCloud Shortcut installer and its QR with a permitted test phone.
 - [ ] Verify individual age, birthday and upcoming-birthday displays using fictional DOBs.
