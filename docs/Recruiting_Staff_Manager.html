@@ -88,6 +88,18 @@
 <div class="stat"><span>Birthdays · next 30 days</span><strong id="birthdayCount">0</strong></div>
 </div>
 
+<section class="panel school-panel" aria-labelledby="schoolAssignmentHeading">
+<div class="panel-overline">RECRUITING / SCHOOL VISITS</div>
+<h2 id="schoolAssignmentHeading">Assign school or event</h2>
+<p class="muted">New kiosk entries are tagged automatically when staff start a visit. For older or corrected records, enter a school and assign it to selected leads, or fill only records that do not have a school. Save changes to CSV afterward.</p>
+<div class="school-assignment-actions">
+<label class="school-name-label" for="schoolAssignName">School / event name</label>
+<input id="schoolAssignName" maxlength="100" autocomplete="off" placeholder="e.g. Northview High School" type="text"/>
+<button type="button" id="assignSchoolSelected">Assign to selected</button>
+<button type="button" class="secondary" id="fillUnassignedSchools">Fill unassigned records</button>
+</div>
+<div class="muted">To select a school visit, search by its school name in the records table, then use Select visible rows. Reassignment never alters consent or outreach status.</div>
+</section>
 <section class="panel birthday-panel" aria-labelledby="birthdayHeading">
 <div class="panel-overline">LEADS / BIRTHDAY OVERVIEW</div>
 <div class="row">
@@ -154,7 +166,7 @@
         Select records to update SMS or email follow-up, or permanently remove. Deletion requires confirmation and saves to the CSV immediately.
        </div>
 </div>
-<input id="search" placeholder="Search name, phone or email" type="search"/>
+<input id="search" placeholder="Search name, phone, email, or school" type="search"/>
 </div>
 <div class="tablewrap">
 <table>
@@ -175,6 +187,7 @@
 <th>
           Grad year
          </th>
+<th>School</th>
 <th>
           Consent
          </th>

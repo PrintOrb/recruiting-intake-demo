@@ -16,7 +16,7 @@ const managerConfig = window.RECRUITING_CONFIG;
 const MANAGER_HEADERS = [
   "Submission ID", "Submitted At", "First Name", "Last Name", "Phone",
   "Email", "Date of Birth", "Graduation Year", "Text Consent",
-  "Contact Status", "Source", "Email Status"
+  "Contact Status", "Source", "Email Status", "School"
 ];
 
 let leadHandle = null;
@@ -226,7 +226,7 @@ function renderDashboard() {
   let shown = 0;
 
   leadRecords.forEach((record, index) => {
-    const searchable = `${record[2]} ${record[3]} ${normalizePhone(record)} ${normalizeEmail(record)}`.toLowerCase();
+    const searchable = `${record[2]} ${record[3]} ${normalizePhone(record)} ${normalizeEmail(record)} ${record[12] || ""}`.toLowerCase();
     if (search && !searchable.includes(search)) return;
     shown++;
 
@@ -270,6 +270,7 @@ function renderDashboard() {
     } else {birthdayCell.textContent="—";}
     tableRow.append(birthdayCell);
     appendCell(record[7]);
+    appendCell(record[12] || "");
 
     const consentCell = document.createElement("td");
     const consentTag = document.createElement("span");
@@ -300,7 +301,7 @@ function renderDashboard() {
   if (!shown) {
     const row = document.createElement("tr");
     const cell = document.createElement("td");
-    cell.colSpan = 12;
+    cell.colSpan = 13;
     cell.textContent = "No records match.";
     row.append(cell);
     tableBody.append(row);
@@ -324,16 +325,18 @@ managerEl("open").addEventListener("click", async () => {
     const fileText = await file.text();
     const parsed = parseManagerCSV(fileText);
     const header = parsed[0] || [];
-    const modern = header.length === MANAGER_HEADERS.length && MANAGER_HEADERS.every((column, index) => header[index] === column);
-    const legacy = header.length === MANAGER_HEADERS.length - 1 &&
-      MANAGER_HEADERS.slice(0, -1).every((column, index) => header[index] === column);
-    if (!modern && !legacy) {
+    const headerMatches = (columns) => header.length === columns.length &&
+      columns.every((column, index) => header[index] === column);
+    if (!headerMatches(MANAGER_HEADERS) &&
+        !headerMatches(MANAGER_HEADERS.slice(0, 12)) &&
+        !headerMatches(MANAGER_HEADERS.slice(0, 11))) {
       throw new Error("The CSV headers do not match " + managerConfig.data.expectedFileName + ".");
     }
     leadHandle = fileHandle;
     sourceCSV = fileText;
     leadRecords = parsed.slice(1).filter((row) => row.some(Boolean))
-      .map((row) => [...row.slice(0, 11), legacy ? "New" : (row[11] || "New")]);
+      .map((row) => [...row.slice(0, 11), header.length >= 12 ? (row[11] || "New") : "New",
+        header.length >= 13 ? (row[12] || "") : ""]);
     selectedLeads.clear();
     unsavedChanges = false;
     managerEl("fileName").textContent = file.name;
@@ -347,10 +350,51 @@ managerEl("open").addEventListener("click", async () => {
 
 managerEl("search").addEventListener("input", renderDashboard);
 
+
+// Bulk assignment changes only the School column and never changes consent or outreach.
+const normalizeSchoolName = (value) => String(value || "").trim().replace(/\s+/g, " ");
+function readSchoolAssignment() {
+  const name = normalizeSchoolName(managerEl("schoolAssignName").value);
+  if (!name || name.length > 100 || /[\r\n\t]/.test(name)) {
+    throw new Error("Enter a school or event name (1–100 characters).");
+  }
+  return name;
+}
+managerEl("assignSchoolSelected").addEventListener("click", () => {
+  try {
+    if (!leadHandle) throw new Error("Open a CSV file first.");
+    if (!selectedLeads.size) throw new Error("Select the student records to tag first.");
+    const name = readSchoolAssignment();
+    const count = selectedLeads.size;
+    if (!window.confirm("Set school to \"" + name + "\" for " + count +
+        " selected record(s)? Existing school tags on these records will be replaced.")) return;
+    for (const index of selectedLeads) leadRecords[index][12] = name;
+    unsavedChanges = true;
+    selectedLeads.clear();
+    managerEl("selectAll").checked = false;
+    renderDashboard();
+    showManagerMessage(count + " record(s) assigned to " + name + ". Click Save changes to CSV.");
+  } catch (error) { showManagerMessage(error.message, "err"); }
+});
+managerEl("fillUnassignedSchools").addEventListener("click", () => {
+  try {
+    if (!leadHandle) throw new Error("Open a CSV file first.");
+    const name = readSchoolAssignment();
+    const records = leadRecords.filter((row) => !normalizeSchoolName(row[12]));
+    if (!records.length) return showManagerMessage("There are no unassigned school records.");
+    if (!window.confirm("Assign school \"" + name + "\" to all " + records.length +
+        " unassigned record(s) in this CSV? Existing schools will not change.")) return;
+    for (const row of records) row[12] = name;
+    unsavedChanges = true;
+    renderDashboard();
+    showManagerMessage(records.length + " unassigned record(s) tagged " + name + ". Click Save changes to CSV.");
+  } catch (error) { showManagerMessage(error.message, "err"); }
+});
+
 managerEl("selectAll").addEventListener("change", (event) => {
   const search = managerEl("search").value.toLowerCase().trim();
   leadRecords.forEach((record, index) => {
-    const searchable = `${record[2]} ${record[3]} ${normalizePhone(record)} ${normalizeEmail(record)}`.toLowerCase();
+    const searchable = `${record[2]} ${record[3]} ${normalizePhone(record)} ${normalizeEmail(record)} ${record[12] || ""}`.toLowerCase();
     if (!search || searchable.includes(search)) {
       if (event.target.checked) selectedLeads.add(index);
       else selectedLeads.delete(index);

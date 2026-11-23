@@ -148,3 +148,10 @@ button.demo-reset {width:auto;font-size:12px;padding:8px 12px;background:#496881
 .birthday-inline-note {display:block;margin-top:5px;color:#2169a0;font-size:10px;font-weight:800;white-space:nowrap;}
 @media(max-width:650px){.birthday-grid {grid-template-columns:1fr;}}
 @media(min-width:1001px){.stats {grid-template-columns:repeat(4,minmax(0,1fr));}}
+
+/* School visit assignment is staff-only. */
+.school-assignment-actions{display:flex;align-items:end;flex-wrap:wrap;gap:10px;margin:17px 0}
+.school-name-label{width:100%;color:#536a80;font-weight:800;font-size:12px}
+#schoolAssignName{flex:1 1 260px;max-width:440px;min-height:41px;padding:10px 12px;border:1px solid #b8c8d8;border-radius:2px;background:white;color:#152c43}
+.school-panel .muted{line-height:1.55}
+@media(max-width:630px){.school-assignment-actions button{width:100%}#schoolAssignName{max-width:none}}
