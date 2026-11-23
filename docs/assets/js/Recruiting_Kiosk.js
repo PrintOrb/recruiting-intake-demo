@@ -82,10 +82,11 @@ applyKioskBackgroundShuffle();
 const KIOSK_HEADERS = [
   "Submission ID", "Submitted At", "First Name", "Last Name", "Phone",
   "Email", "Date of Birth", "Graduation Year", "Text Consent",
-  "Contact Status", "Source", "Email Status"
+  "Contact Status", "Source", "Email Status", "School"
 ];
 
 let leadFileHandle = null;
+let activeSchool = ""; // Staff-selected once during kiosk setup, never edited by students.
 const kioskEl = (id) => document.getElementById(id);
 
 function showKioskPanel(id) {
@@ -150,17 +151,19 @@ function parseKioskCSV(text) {
 async function loadKioskRows() {
   const file = await leadFileHandle.getFile();
   const rows = parseKioskCSV(await file.text());
-  // Old versions had eleven columns. Add Email Status when first saved,
-  // preserving all existing records and SMS statuses.
-  const legacyHeaders = KIOSK_HEADERS.slice(0, -1);
+  // Accept prior 11- or 12-column files. New School is appended so
+  // existing column indexes, consent, SMS and email status remain unchanged.
   const header = rows[0] || [];
-  const modern = KIOSK_HEADERS.every((value, index) => header[index] === value) && header.length === KIOSK_HEADERS.length;
-  const legacy = legacyHeaders.every((value, index) => header[index] === value) && header.length === legacyHeaders.length;
-  if (!modern && !legacy) {
+  const previous11 = KIOSK_HEADERS.slice(0, 11);
+  const previous12 = KIOSK_HEADERS.slice(0, 12);
+  const matches = (columns) => header.length === columns.length &&
+    columns.every((value, index) => header[index] === value);
+  if (!matches(KIOSK_HEADERS) && !matches(previous12) && !matches(previous11)) {
     throw new Error("This file has different columns. Choose " + kioskConfig.data.expectedFileName + ".");
   }
   return rows.slice(1).filter((row) => row.some(Boolean)).map((row) =>
-    legacy ? [...row.slice(0, 11), "New"] : [...row.slice(0, 11), row[11] || "New"]
+    [...row.slice(0, 11), header.length >= 12 ? (row[11] || "New") : "New",
+      header.length >= 13 ? (row[12] || "") : ""]
   );
 }
 
@@ -192,6 +195,10 @@ function showKioskError(id, error) {
 kioskEl("connect").addEventListener("click", async () => {
   kioskEl("setupError").classList.add("hidden");
   try {
+    const school = kioskEl("visitSchool").value.trim().replace(/\s+/g, " ");
+    if (!school || school.length > 100 || /[\r\n\t]/.test(school)) {
+      throw new Error("Enter the school or event name (1–100 characters) before starting.");
+    }
     if (!window.showOpenFilePicker) {
       throw new Error("Use a recent desktop version of Microsoft Edge or Chrome to edit a local CSV.");
     }
@@ -201,6 +208,8 @@ kioskEl("connect").addEventListener("click", async () => {
     });
     leadFileHandle = handle;
     await loadKioskRows();
+    activeSchool = school;
+    kioskEl("schoolSessionBadge").textContent = "School: " + activeSchool;
     showKioskPanel("formCard");
     kioskEl("first").focus();
   } catch (error) {
@@ -256,7 +265,7 @@ kioskEl("interestForm").addEventListener("submit", async (event) => {
       const submissionId = Date.now() + "-" + Math.floor(Math.random() * 1e6);
       records.push([
         submissionId, new Date().toISOString(), first, last, phone, email,
-        dob, grad, wantsContact ? "Yes" : "No", "New", kioskConfig.data.sourceLabel, "New"
+        dob, grad, wantsContact ? "Yes" : "No", "New", kioskConfig.data.sourceLabel, "New", activeSchool
       ]);
       await saveKioskRows(records);
     }

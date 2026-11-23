@@ -337,3 +337,8 @@ button.demo-reset {width:auto;font-size:12px;padding:8px 12px;background:#496881
 /* Optional outreach consent; demo data attestation remains separately required. */
 .consent-explainer{font-size:12px;line-height:1.5;color:#465b70;margin:5px 0 16px;max-width:520px}
 .demo-attestation{margin:12px 0 16px}
+
+/* Staff selects one school per kiosk session; students cannot edit the tag. */
+.staff-school-setup{margin:22px 0 14px}
+.staff-school-hint{font:12px/1.5 "Segoe UI",Arial,sans-serif;color:#526980;margin:7px 0 0}
+.school-session-badge{font:800 11px/1.4 "Segoe UI",Arial,sans-serif;color:#234f79;background:#e9f3fe;border-left:3px solid #1765bb;padding:11px 13px;margin:0 0 15px;overflow-wrap:anywhere}

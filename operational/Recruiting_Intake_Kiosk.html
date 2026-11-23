@@ -59,6 +59,11 @@
      </b>
      once on this computer. New submissions will be written directly into that Excel-compatible file. Use Microsoft Edge or Chrome on a Windows computer.
     </p>
+<div class="field staff-school-setup">
+<label for="visitSchool">School / event name *</label>
+<input autocomplete="off" id="visitSchool" maxlength="100" placeholder="e.g. Northview High School" required/>
+<p class="staff-school-hint">Staff only. Set once before student check-in; every new entry is tagged with this school.</p>
+</div>
 <button class="primary-action" id="connect">
      Select lead file
     </button>
@@ -66,7 +71,7 @@
 </div>
 
 </section>
-<section class="card hidden" id="formCard"><div class="card-meta">RECRUITING INTEREST  //  YOUR NEXT STEP</div>
+<section class="card hidden" id="formCard"><div id="schoolSessionBadge" class="school-session-badge" aria-label="Current school"></div><div class="card-meta">RECRUITING INTEREST  //  YOUR NEXT STEP</div>
 <div class="topline">
 <span class="dot">
 </span>
